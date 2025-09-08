@@ -1,0 +1,344 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "create": "Create",
+    "update": "Update",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "submit": "Submit",
+    "confirm": "Confirm",
+    "close": "Close",
+    "view": "View",
+    "download": "Download",
+    "upload": "Upload",
+    "share": "Share",
+    "copy": "Copy",
+    "print": "Print",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "name": "Name",
+    "description": "Description",
+    "price": "Price",
+    "date": "Date",
+    "time": "Time",
+    "category": "Category",
+    "tags": "Tags",
+    "status": "Status",
+    "active": "Active",
+    "inactive": "Inactive",
+    "published": "Published",
+    "draft": "Draft",
+    "featured": "Featured",
+    "popular": "Popular",
+    "new": "New",
+    "recommended": "Recommended"
+  },
+  "navigation": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "coaching": "Coaching",
+    "protocols": "Protocols",
+    "blog": "Blog",
+    "shop": "Shop",
+    "contact": "Contact",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+    "profile": "Profile",
+    "dashboard": "Dashboard",
+    "settings": "Settings"
+  },
+  "hero": {
+    "title": "Transform Your Athletic Performance",
+    "subtitle": "Expert coaching and personalized protocols to maximize your potential",
+    "description": "Join thousands of athletes who have revolutionized their training with Engel Garcia Gomez's proven G-Maxing methodology.",
+    "cta": {
+      "primary": "Start Your Transformation",
+      "secondary": "Learn More",
+      "book_consultation": "Book Free Consultation"
+    },
+    "stats": {
+      "athletes_trained": "Athletes Trained",
+      "success_rate": "Success Rate",
+      "years_experience": "Years Experience",
+      "protocols_created": "Protocols Created"
+    }
+  },
+  "about": {
+    "title": "Meet Engel Garcia Gomez",
+    "subtitle": "World-Class Sports Performance Coach",
+    "description": "With over a decade of experience in elite sports coaching, Engel Garcia Gomez has developed the revolutionary G-Maxing methodology that has transformed thousands of athletes worldwide.",
+    "expertise": {
+      "title": "Areas of Expertise",
+      "strength": "Strength & Conditioning",
+      "performance": "Performance Optimization",
+      "recovery": "Recovery & Rehabilitation",
+      "nutrition": "Sports Nutrition",
+      "psychology": "Sports Psychology",
+      "biomechanics": "Biomechanical Analysis"
+    },
+    "achievements": {
+      "title": "Achievements",
+      "certifications": "International Certifications",
+      "publications": "Research Publications",
+      "athletes": "Elite Athletes Coached",
+      "records": "Records Broken"
+    }
+  },
+  "services": {
+    "title": "Coaching Services",
+    "subtitle": "Personalized training programs designed for maximum results",
+    "personal_coaching": {
+      "title": "Personal Coaching",
+      "description": "One-on-one coaching sessions tailored to your specific goals and needs",
+      "features": [
+        "Personalized training protocols",
+        "Regular progress assessments",
+        "Nutrition guidance",
+        "Recovery optimization",
+        "Mental performance coaching"
+      ]
+    },
+    "group_training": {
+      "title": "Group Training",
+      "description": "High-energy group sessions that build community and drive results",
+      "features": [
+        "Small group dynamics",
+        "Competitive environment",
+        "Cost-effective training",
+        "Peer motivation",
+        "Structured progressions"
+      ]
+    },
+    "online_coaching": {
+      "title": "Online Coaching",
+      "description": "Remote coaching programs accessible anywhere in the world",
+      "features": [
+        "Video analysis",
+        "Custom workout plans",
+        "Progress tracking",
+        "Weekly check-ins",
+        "24/7 support"
+      ]
+    },
+    "protocol_development": {
+      "title": "Protocol Development",
+      "description": "Custom training protocols developed specifically for your sport",
+      "features": [
+        "Sport-specific design",
+        "Evidence-based methods",
+        "Performance metrics",
+        "Injury prevention",
+        "Long-term planning"
+      ]
+    }
+  },
+  "protocols": {
+    "title": "Training Protocols",
+    "subtitle": "Scientifically-proven training systems for peak performance",
+    "featured": "Featured Protocols",
+    "categories": {
+      "strength": "Strength Training",
+      "endurance": "Endurance",
+      "agility": "Agility & Speed",
+      "recovery": "Recovery",
+      "nutrition": "Nutrition"
+    },
+    "difficulty": {
+      "beginner": "Beginner",
+      "intermediate": "Intermediate",
+      "advanced": "Advanced",
+      "expert": "Expert"
+    },
+    "duration": {
+      "short": "Short Term (4-8 weeks)",
+      "medium": "Medium Term (2-4 months)",
+      "long": "Long Term (6+ months)"
+    }
+  },
+  "blog": {
+    "title": "Performance Blog",
+    "subtitle": "Expert insights, training tips, and performance science",
+    "latest": "Latest Articles",
+    "categories": {
+      "training": "Training",
+      "nutrition": "Nutrition",
+      "recovery": "Recovery",
+      "psychology": "Psychology",
+      "science": "Sports Science",
+      "lifestyle": "Lifestyle"
+    },
+    "read_more": "Read More",
+    "read_time": "min read",
+    "share": "Share Article",
+    "related": "Related Articles",
+    "author": "By Engel Garcia Gomez",
+    "published": "Published on",
+    "updated": "Updated on"
+  },
+  "shop": {
+    "title": "Performance Shop",
+    "subtitle": "Premium training programs and digital products",
+    "categories": {
+      "programs": "Training Programs",
+      "ebooks": "E-Books",
+      "courses": "Online Courses",
+      "equipment": "Equipment",
+      "supplements": "Supplements"
+    },
+    "filters": {
+      "all": "All Products",
+      "price_low": "Price: Low to High",
+      "price_high": "Price: High to Low",
+      "newest": "Newest First",
+      "popular": "Most Popular",
+      "rating": "Highest Rated"
+    },
+    "product": {
+      "add_to_cart": "Add to Cart",
+      "buy_now": "Buy Now",
+      "in_stock": "In Stock",
+      "out_of_stock": "Out of Stock",
+      "digital_download": "Digital Download",
+      "instant_access": "Instant Access",
+      "rating": "Rating",
+      "reviews": "Reviews",
+      "specifications": "Specifications",
+      "included": "What's Included",
+      "requirements": "Requirements"
+    },
+    "cart": {
+      "title": "Shopping Cart",
+      "empty": "Your cart is empty",
+      "quantity": "Quantity",
+      "subtotal": "Subtotal",
+      "total": "Total",
+      "checkout": "Checkout",
+      "continue_shopping": "Continue Shopping",
+      "remove": "Remove"
+    }
+  },
+  "contact": {
+    "title": "Get In Touch",
+    "subtitle": "Ready to start your transformation journey?",
+    "info": {
+      "title": "Contact Information",
+      "email": "Email",
+      "phone": "Phone",
+      "location": "Location",
+      "hours": "Hours"
+    },
+    "form": {
+      "title": "Send Message",
+      "name": "Full Name",
+      "email": "Email Address",
+      "subject": "Subject",
+      "message": "Message",
+      "send": "Send Message",
+      "success": "Message sent successfully!",
+      "error": "Failed to send message. Please try again."
+    },
+    "consultation": {
+      "title": "Book Free Consultation",
+      "description": "Schedule a complimentary 30-minute consultation to discuss your goals",
+      "book": "Book Now"
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Welcome Back",
+      "subtitle": "Sign in to your account",
+      "email": "Email Address",
+      "password": "Password",
+      "remember": "Remember me",
+      "forgot_password": "Forgot password?",
+      "submit": "Sign In",
+      "no_account": "Don't have an account?",
+      "sign_up": "Sign up here"
+    },
+    "register": {
+      "title": "Join EngelGMax",
+      "subtitle": "Create your account to get started",
+      "first_name": "First Name",
+      "last_name": "Last Name",
+      "email": "Email Address",
+      "password": "Password",
+      "confirm_password": "Confirm Password",
+      "terms": "I agree to the Terms of Service and Privacy Policy",
+      "submit": "Create Account",
+      "have_account": "Already have an account?",
+      "sign_in": "Sign in here"
+    },
+    "forgot_password": {
+      "title": "Reset Password",
+      "subtitle": "Enter your email to receive reset instructions",
+      "email": "Email Address",
+      "submit": "Send Reset Link",
+      "success": "Reset link sent to your email",
+      "back_to_login": "Back to Login"
+    }
+  },
+  "dashboard": {
+    "welcome": "Welcome back",
+    "overview": "Overview",
+    "stats": {
+      "workouts_completed": "Workouts Completed",
+      "protocols_active": "Active Protocols",
+      "progress": "Progress",
+      "streak": "Current Streak"
+    },
+    "recent_activity": "Recent Activity",
+    "upcoming": "Upcoming Sessions",
+    "quick_actions": "Quick Actions",
+    "view_protocols": "View Protocols",
+    "schedule_session": "Schedule Session",
+    "track_progress": "Track Progress"
+  },
+  "footer": {
+    "company": {
+      "title": "EngelGMax",
+      "description": "Maximizing athletic potential through scientific training methodologies and personalized coaching."
+    },
+    "links": {
+      "quick_links": "Quick Links",
+      "services": "Services",
+      "legal": "Legal"
+    },
+    "contact": {
+      "title": "Contact",
+      "email": "info@engelgmax.com",
+      "phone": "+1 (555) 123-4567",
+      "address": "123 Performance Ave, Training City, TC 12345"
+    },
+    "social": {
+      "title": "Follow Us",
+      "instagram": "Instagram",
+      "youtube": "YouTube",
+      "twitter": "Twitter",
+      "facebook": "Facebook"
+    },
+    "newsletter": {
+      "title": "Performance Newsletter",
+      "description": "Get weekly tips and insights delivered to your inbox",
+      "placeholder": "Enter your email",
+      "subscribe": "Subscribe"
+    },
+    "copyright": "© 2024 EngelGMax. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "cookies": "Cookie Policy"
+  }
+}

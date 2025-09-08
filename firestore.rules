@@ -1,0 +1,185 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isAdmin() {
+      return isAuthenticated() && 
+             get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+    
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+    
+    function isOwnerOrAdmin(userId) {
+      return isOwner(userId) || isAdmin();
+    }
+
+    // User profiles
+    match /users/{userId} {
+      allow read: if isOwnerOrAdmin(userId);
+      allow create: if isAuthenticated() && request.auth.uid == userId;
+      allow update: if isOwnerOrAdmin(userId);
+      allow delete: if isAdmin();
+    }
+
+    // Products (Public read, admin write)
+    match /products/{productId} {
+      allow read: if resource.data.active == true || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    // Product categories (Public read, admin write)
+    match /categories/{categoryId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Blog posts (Public read for published, admin write)
+    match /blogPosts/{postId} {
+      allow read: if resource.data.published == true || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    // Blog categories and tags
+    match /blogCategories/{categoryId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    
+    match /blogTags/{tagId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Orders (Customer and admin access)
+    match /orders/{orderId} {
+      allow read: if isAuthenticated() && 
+                    (resource.data.customerEmail == request.auth.token.email || isAdmin());
+      allow create: if isAuthenticated();
+      allow update: if isAdmin() || 
+                      (isAuthenticated() && resource.data.customerEmail == request.auth.token.email 
+                       && request.data.status == resource.data.status); // Only allow status updates by admin
+      allow delete: if isAdmin();
+    }
+
+    // Protocol orders (Customer and admin access)
+    match /protocolOrders/{orderId} {
+      allow read: if isAuthenticated() && 
+                    (resource.data.customerEmail == request.auth.token.email || isAdmin());
+      allow create: if isAuthenticated();
+      allow update: if isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // Generated protocols (Customer and admin access)
+    match /protocols/{protocolId} {
+      allow read: if isAuthenticated() && 
+                    (resource.data.userId == request.auth.uid || isAdmin());
+      allow write: if isAdmin();
+    }
+
+    // Newsletter subscribers (Anyone can subscribe, admin manages)
+    match /newsletterSubscribers/{subscriberId} {
+      allow create: if true; // Anyone can subscribe
+      allow read, update, delete: if isAdmin();
+    }
+
+    // Newsletter campaigns (Admin only)
+    match /newsletterCampaigns/{campaignId} {
+      allow read, write: if isAdmin();
+    }
+
+    // Contact form submissions (Anyone can create, admin reads)
+    match /contactSubmissions/{submissionId} {
+      allow create: if true;
+      allow read, update, delete: if isAdmin();
+    }
+
+    // Testimonials (Admin manages, public reads published)
+    match /testimonials/{testimonialId} {
+      allow read: if resource.data.published == true || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    // Analytics data (Admin only)
+    match /analytics/{document=**} {
+      allow read, write: if isAdmin();
+    }
+
+    // Site settings (Admin only)
+    match /settings/{settingId} {
+      allow read: if true; // Public settings like site info
+      allow write: if isAdmin();
+    }
+
+    // User sessions and activity (Owner and admin)
+    match /userSessions/{userId}/{sessionId} {
+      allow read, write: if isOwnerOrAdmin(userId);
+    }
+
+    // Recommendations cache (Owner and admin)
+    match /recommendations/{userId} {
+      allow read, write: if isOwnerOrAdmin(userId);
+    }
+
+    // Search analytics (Admin only)
+    match /searchAnalytics/{document=**} {
+      allow read, write: if isAdmin();
+    }
+
+    // Social media feeds cache (Public read, admin write)
+    match /socialFeeds/{feedId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // FAQ items (Public read, admin write)
+    match /faqs/{faqId} {
+      allow read: if resource.data.published == true || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    // Exercise library (Public read, admin write)
+    match /exercises/{exerciseId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Nutrition database (Public read, admin write)
+    match /nutrition/{itemId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // User progress tracking (Owner and admin)
+    match /userProgress/{userId}/{document=**} {
+      allow read, write: if isOwnerOrAdmin(userId);
+    }
+
+    // Chatbot interactions (Owner and admin)
+    match /chatSessions/{userId}/{sessionId} {
+      allow read, write: if isOwnerOrAdmin(userId);
+    }
+
+    // Email templates (Admin only)
+    match /emailTemplates/{templateId} {
+      allow read, write: if isAdmin();
+    }
+
+    // Webhooks and integrations (Admin only)
+    match /webhooks/{webhookId} {
+      allow read, write: if isAdmin();
+    }
+
+    // Site backups and exports (Admin only)
+    match /backups/{backupId} {
+      allow read, write: if isAdmin();
+    }
+  }
+}

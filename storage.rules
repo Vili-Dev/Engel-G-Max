@@ -1,0 +1,106 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isAdmin() {
+      return isAuthenticated() && 
+             request.auth.token.admin == true;
+    }
+    
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // Public assets (product images, blog images, site assets)
+    match /public/{allPaths=**} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Product images (public read, admin write)
+    match /products/{allPaths=**} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Blog images and media (public read, admin write)
+    match /blog/{allPaths=**} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // User profile photos and documents
+    match /users/{userId}/{allPaths=**} {
+      allow read: if isOwner(userId) || isAdmin();
+      allow write: if isOwner(userId) || isAdmin();
+    }
+
+    // Generated protocols (private, user and admin access)
+    match /protocols/{userId}/{allPaths=**} {
+      allow read: if isOwner(userId) || isAdmin();
+      allow write: if isAdmin(); // Only admin can generate and upload protocols
+    }
+
+    // User progress photos and documents
+    match /progress/{userId}/{allPaths=**} {
+      allow read: if isOwner(userId) || isAdmin();
+      allow write: if isOwner(userId) || isAdmin();
+    }
+
+    // Testimonial media (admin managed)
+    match /testimonials/{allPaths=**} {
+      allow read: if true; // Public testimonials
+      allow write: if isAdmin();
+    }
+
+    // Newsletter attachments and media
+    match /newsletters/{allPaths=**} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    // Temporary uploads (24-hour expiration)
+    match /temp/{userId}/{allPaths=**} {
+      allow read, write: if isOwner(userId) || isAdmin();
+      // Note: Use Cloud Functions to clean up temp files after 24 hours
+    }
+
+    // Backup files (admin only)
+    match /backups/{allPaths=**} {
+      allow read, write: if isAdmin();
+    }
+
+    // Analytics exports (admin only)
+    match /exports/{allPaths=**} {
+      allow read, write: if isAdmin();
+    }
+
+    // Social media content cache
+    match /social/{allPaths=**} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // SEO assets (sitemaps, robots.txt, etc.)
+    match /seo/{allPaths=**} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Email templates and assets
+    match /email-assets/{allPaths=**} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    // User chat attachments
+    match /chat/{userId}/{allPaths=**} {
+      allow read, write: if isOwner(userId) || isAdmin();
+    }
+  }
+}

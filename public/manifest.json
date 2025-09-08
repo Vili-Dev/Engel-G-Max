@@ -1,0 +1,144 @@
+{
+  "name": "Engel G-Max - Méthode G-Maxing Officielle",
+  "short_name": "Engel G-Max",
+  "description": "Plateforme officielle d'Engel Garcia Gomez pour la méthode G-Maxing. Transformation physique et mentale complète.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0F172A",
+  "theme_color": "#FFD700",
+  "orientation": "portrait-primary",
+  "categories": ["health", "fitness", "lifestyle", "sports"],
+  "lang": "fr",
+  "dir": "ltr",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Blog G-Maxing",
+      "short_name": "Blog",
+      "description": "Découvrez les derniers articles sur la méthode G-Maxing",
+      "url": "/blog",
+      "icons": [{ "src": "/icons/blog-96x96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Coaching Personnalisé",
+      "short_name": "Coaching",
+      "description": "Réservez votre session de coaching avec Engel Garcia Gomez",
+      "url": "/coaching",
+      "icons": [{ "src": "/icons/coaching-96x96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Boutique G-Max",
+      "short_name": "Shop",
+      "description": "Programmes et produits G-Maxing officiels",
+      "url": "/shop",
+      "icons": [{ "src": "/icons/shop-96x96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Générateur Protocole",
+      "short_name": "Protocole",
+      "description": "Créez votre protocole G-Maxing personnalisé",
+      "url": "/protocol-generator",
+      "icons": [{ "src": "/icons/protocol-96x96.png", "sizes": "96x96" }]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshots/desktop-homepage.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Page d'accueil Engel G-Max sur desktop"
+    },
+    {
+      "src": "/screenshots/mobile-homepage.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Page d'accueil Engel G-Max sur mobile"
+    },
+    {
+      "src": "/screenshots/blog-page.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Blog G-Maxing avec articles d'Engel Garcia Gomez"
+    },
+    {
+      "src": "/screenshots/coaching-page.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Page de coaching personnalisé G-Maxing"
+    }
+  ],
+  "related_applications": [
+    {
+      "platform": "webapp",
+      "url": "https://engelgmax.com/manifest.json"
+    }
+  ],
+  "prefer_related_applications": false,
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "handle_links": "preferred",
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  },
+  "protocol_handlers": [
+    {
+      "protocol": "web+gmax",
+      "url": "/protocol?data=%s"
+    }
+  ]
+}

@@ -1,0 +1,344 @@
+{
+  "common": {
+    "loading": "Cargando...",
+    "error": "Error",
+    "success": "Éxito",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "add": "Agregar",
+    "create": "Crear",
+    "update": "Actualizar",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "sort": "Ordenar",
+    "back": "Atrás",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "submit": "Enviar",
+    "confirm": "Confirmar",
+    "close": "Cerrar",
+    "view": "Ver",
+    "download": "Descargar",
+    "upload": "Subir",
+    "share": "Compartir",
+    "copy": "Copiar",
+    "print": "Imprimir",
+    "email": "Email",
+    "phone": "Teléfono",
+    "address": "Dirección",
+    "name": "Nombre",
+    "description": "Descripción",
+    "price": "Precio",
+    "date": "Fecha",
+    "time": "Hora",
+    "category": "Categoría",
+    "tags": "Etiquetas",
+    "status": "Estado",
+    "active": "Activo",
+    "inactive": "Inactivo",
+    "published": "Publicado",
+    "draft": "Borrador",
+    "featured": "Destacado",
+    "popular": "Popular",
+    "new": "Nuevo",
+    "recommended": "Recomendado"
+  },
+  "navigation": {
+    "home": "Inicio",
+    "about": "Acerca de",
+    "services": "Servicios",
+    "coaching": "Entrenamiento",
+    "protocols": "Protocolos",
+    "blog": "Blog",
+    "shop": "Tienda",
+    "contact": "Contacto",
+    "login": "Iniciar Sesión",
+    "register": "Registro",
+    "logout": "Cerrar Sesión",
+    "profile": "Perfil",
+    "dashboard": "Panel",
+    "settings": "Configuración"
+  },
+  "hero": {
+    "title": "Transforma Tu Rendimiento Atlético",
+    "subtitle": "Entrenamiento experto y protocolos personalizados para maximizar tu potencial",
+    "description": "Únete a miles de atletas que han revolucionado su entrenamiento con la metodología G-Maxing probada de Engel Garcia Gomez.",
+    "cta": {
+      "primary": "Comienza Tu Transformación",
+      "secondary": "Saber Más",
+      "book_consultation": "Consulta Gratuita"
+    },
+    "stats": {
+      "athletes_trained": "Atletas Entrenados",
+      "success_rate": "Tasa de Éxito",
+      "years_experience": "Años de Experiencia",
+      "protocols_created": "Protocolos Creados"
+    }
+  },
+  "about": {
+    "title": "Conoce a Engel Garcia Gomez",
+    "subtitle": "Entrenador de Rendimiento Deportivo de Clase Mundial",
+    "description": "Con más de una década de experiencia en entrenamiento deportivo de élite, Engel Garcia Gomez ha desarrollado la metodología revolucionaria G-Maxing que ha transformado miles de atletas en todo el mundo.",
+    "expertise": {
+      "title": "Áreas de Especialización",
+      "strength": "Fuerza y Acondicionamiento",
+      "performance": "Optimización Rendimiento",
+      "recovery": "Recuperación y Rehabilitación",
+      "nutrition": "Nutrición Deportiva",
+      "psychology": "Psicología Deportiva",
+      "biomechanics": "Análisis Biomecánico"
+    },
+    "achievements": {
+      "title": "Logros",
+      "certifications": "Certificaciones Internacionales",
+      "publications": "Publicaciones Investigación",
+      "athletes": "Atletas Élite Entrenados",
+      "records": "Récords Rotos"
+    }
+  },
+  "services": {
+    "title": "Servicios de Entrenamiento",
+    "subtitle": "Programas de entrenamiento personalizados diseñados para resultados máximos",
+    "personal_coaching": {
+      "title": "Entrenamiento Personal",
+      "description": "Sesiones de entrenamiento individuales adaptadas a tus objetivos y necesidades específicas",
+      "features": [
+        "Protocolos de entrenamiento personalizados",
+        "Evaluaciones regulares de progreso",
+        "Guía nutricional",
+        "Optimización de recuperación",
+        "Entrenamiento mental de rendimiento"
+      ]
+    },
+    "group_training": {
+      "title": "Entrenamiento Grupal",
+      "description": "Sesiones grupales de alta energía que construyen comunidad y generan resultados",
+      "features": [
+        "Dinámicas de grupo pequeño",
+        "Ambiente competitivo",
+        "Entrenamiento económico",
+        "Motivación entre pares",
+        "Progresiones estructuradas"
+      ]
+    },
+    "online_coaching": {
+      "title": "Entrenamiento Online",
+      "description": "Programas de entrenamiento remoto accesibles desde cualquier lugar del mundo",
+      "features": [
+        "Análisis de video",
+        "Planes de ejercicio personalizados",
+        "Seguimiento de progreso",
+        "Check-ins semanales",
+        "Soporte 24/7"
+      ]
+    },
+    "protocol_development": {
+      "title": "Desarrollo de Protocolos",
+      "description": "Protocolos de entrenamiento personalizados desarrollados específicamente para tu deporte",
+      "features": [
+        "Diseño específico del deporte",
+        "Métodos basados en evidencia",
+        "Métricas de rendimiento",
+        "Prevención de lesiones",
+        "Planificación a largo plazo"
+      ]
+    }
+  },
+  "protocols": {
+    "title": "Protocolos de Entrenamiento",
+    "subtitle": "Sistemas de entrenamiento científicamente probados para el máximo rendimiento",
+    "featured": "Protocolos Destacados",
+    "categories": {
+      "strength": "Entrenamiento de Fuerza",
+      "endurance": "Resistencia",
+      "agility": "Agilidad y Velocidad",
+      "recovery": "Recuperación",
+      "nutrition": "Nutrición"
+    },
+    "difficulty": {
+      "beginner": "Principiante",
+      "intermediate": "Intermedio",
+      "advanced": "Avanzado",
+      "expert": "Experto"
+    },
+    "duration": {
+      "short": "Corto Plazo (4-8 semanas)",
+      "medium": "Medio Plazo (2-4 meses)",
+      "long": "Largo Plazo (6+ meses)"
+    }
+  },
+  "blog": {
+    "title": "Blog de Rendimiento",
+    "subtitle": "Insights de expertos, consejos de entrenamiento y ciencia del rendimiento",
+    "latest": "Artículos Recientes",
+    "categories": {
+      "training": "Entrenamiento",
+      "nutrition": "Nutrición",
+      "recovery": "Recuperación",
+      "psychology": "Psicología",
+      "science": "Ciencias del Deporte",
+      "lifestyle": "Estilo de Vida"
+    },
+    "read_more": "Leer Más",
+    "read_time": "min de lectura",
+    "share": "Compartir Artículo",
+    "related": "Artículos Relacionados",
+    "author": "Por Engel Garcia Gomez",
+    "published": "Publicado el",
+    "updated": "Actualizado el"
+  },
+  "shop": {
+    "title": "Tienda de Rendimiento",
+    "subtitle": "Programas de entrenamiento premium y productos digitales",
+    "categories": {
+      "programs": "Programas de Entrenamiento",
+      "ebooks": "E-Books",
+      "courses": "Cursos Online",
+      "equipment": "Equipamiento",
+      "supplements": "Suplementos"
+    },
+    "filters": {
+      "all": "Todos los Productos",
+      "price_low": "Precio: Menor a Mayor",
+      "price_high": "Precio: Mayor a Menor",
+      "newest": "Más Recientes",
+      "popular": "Más Populares",
+      "rating": "Mejor Calificados"
+    },
+    "product": {
+      "add_to_cart": "Agregar al Carrito",
+      "buy_now": "Comprar Ahora",
+      "in_stock": "En Stock",
+      "out_of_stock": "Agotado",
+      "digital_download": "Descarga Digital",
+      "instant_access": "Acceso Instantáneo",
+      "rating": "Calificación",
+      "reviews": "Reseñas",
+      "specifications": "Especificaciones",
+      "included": "Incluido",
+      "requirements": "Requisitos"
+    },
+    "cart": {
+      "title": "Carrito de Compras",
+      "empty": "Tu carrito está vacío",
+      "quantity": "Cantidad",
+      "subtotal": "Subtotal",
+      "total": "Total",
+      "checkout": "Checkout",
+      "continue_shopping": "Continuar Comprando",
+      "remove": "Eliminar"
+    }
+  },
+  "contact": {
+    "title": "Ponte en Contacto",
+    "subtitle": "¿Listo para comenzar tu viaje de transformación?",
+    "info": {
+      "title": "Información de Contacto",
+      "email": "Email",
+      "phone": "Teléfono",
+      "location": "Ubicación",
+      "hours": "Horarios"
+    },
+    "form": {
+      "title": "Enviar Mensaje",
+      "name": "Nombre Completo",
+      "email": "Dirección Email",
+      "subject": "Asunto",
+      "message": "Mensaje",
+      "send": "Enviar Mensaje",
+      "success": "¡Mensaje enviado exitosamente!",
+      "error": "Error al enviar mensaje. Por favor intenta de nuevo."
+    },
+    "consultation": {
+      "title": "Consulta Gratuita",
+      "description": "Programa una consulta gratuita de 30 minutos para discutir tus objetivos",
+      "book": "Reservar Ahora"
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Bienvenido de Vuelta",
+      "subtitle": "Inicia sesión en tu cuenta",
+      "email": "Dirección Email",
+      "password": "Contraseña",
+      "remember": "Recordarme",
+      "forgot_password": "¿Olvidaste tu contraseña?",
+      "submit": "Iniciar Sesión",
+      "no_account": "¿No tienes cuenta?",
+      "sign_up": "Regístrate aquí"
+    },
+    "register": {
+      "title": "Únete a EngelGMax",
+      "subtitle": "Crea tu cuenta para comenzar",
+      "first_name": "Nombre",
+      "last_name": "Apellido",
+      "email": "Dirección Email",
+      "password": "Contraseña",
+      "confirm_password": "Confirmar Contraseña",
+      "terms": "Acepto los Términos de Servicio y Política de Privacidad",
+      "submit": "Crear Cuenta",
+      "have_account": "¿Ya tienes cuenta?",
+      "sign_in": "Inicia sesión aquí"
+    },
+    "forgot_password": {
+      "title": "Restablecer Contraseña",
+      "subtitle": "Ingresa tu email para recibir instrucciones",
+      "email": "Dirección Email",
+      "submit": "Enviar Enlace",
+      "success": "Enlace enviado a tu email",
+      "back_to_login": "Volver al Login"
+    }
+  },
+  "dashboard": {
+    "welcome": "Bienvenido de vuelta",
+    "overview": "Resumen",
+    "stats": {
+      "workouts_completed": "Entrenamientos Completados",
+      "protocols_active": "Protocolos Activos",
+      "progress": "Progreso",
+      "streak": "Racha Actual"
+    },
+    "recent_activity": "Actividad Reciente",
+    "upcoming": "Sesiones Próximas",
+    "quick_actions": "Acciones Rápidas",
+    "view_protocols": "Ver Protocolos",
+    "schedule_session": "Programar Sesión",
+    "track_progress": "Seguir Progreso"
+  },
+  "footer": {
+    "company": {
+      "title": "EngelGMax",
+      "description": "Maximizando el potencial atlético a través de metodologías de entrenamiento científicas y coaching personalizado."
+    },
+    "links": {
+      "quick_links": "Enlaces Rápidos",
+      "services": "Servicios",
+      "legal": "Legal"
+    },
+    "contact": {
+      "title": "Contacto",
+      "email": "info@engelgmax.com",
+      "phone": "+1 (555) 123-4567",
+      "address": "123 Avenida Rendimiento, Ciudad Entrenamiento, CE 12345"
+    },
+    "social": {
+      "title": "Síguenos",
+      "instagram": "Instagram",
+      "youtube": "YouTube",
+      "twitter": "Twitter",
+      "facebook": "Facebook"
+    },
+    "newsletter": {
+      "title": "Newsletter de Rendimiento",
+      "description": "Recibe consejos e insights semanales en tu bandeja de entrada",
+      "placeholder": "Ingresa tu email",
+      "subscribe": "Suscribirse"
+    },
+    "copyright": "© 2024 EngelGMax. Todos los derechos reservados.",
+    "privacy": "Política de Privacidad",
+    "terms": "Términos de Servicio",
+    "cookies": "Política de Cookies"
+  }
+}

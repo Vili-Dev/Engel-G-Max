@@ -1,0 +1,350 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CSS Custom Properties for Glassmorphism */
+:root {
+  --glass-bg-light: rgba(255, 255, 255, 0.1);
+  --glass-bg-medium: rgba(255, 255, 255, 0.2);
+  --glass-bg-heavy: rgba(255, 255, 255, 0.3);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  --backdrop-blur: blur(4px);
+  --backdrop-blur-heavy: blur(8px);
+  --backdrop-blur-light: blur(2px);
+  
+  /* Dark theme glass variations */
+  --glass-bg-dark-light: rgba(255, 255, 255, 0.05);
+  --glass-bg-dark-medium: rgba(255, 255, 255, 0.1);
+  --glass-bg-dark-heavy: rgba(255, 255, 255, 0.15);
+  --glass-border-dark: rgba(255, 255, 255, 0.1);
+  --glass-shadow-dark: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  
+  /* Brand gradients */
+  --hero-gradient: linear-gradient(135deg, #0066FF 0%, #6366f1 50%, #0066FF 100%);
+  --card-gradient: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  --text-gradient: linear-gradient(135deg, #60a5fa 0%, #a855f7 100%);
+  --cta-gradient: linear-gradient(135deg, #FF6B35 0%, #ef4444 100%);
+  
+  /* Animation timings */
+  --spring-easing: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --smooth-easing: cubic-bezier(0.4, 0.0, 0.2, 1);
+  --bounce-easing: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Dark theme adjustments */
+.dark {
+  --glass-bg-light: var(--glass-bg-dark-light);
+  --glass-bg-medium: var(--glass-bg-dark-medium);
+  --glass-bg-heavy: var(--glass-bg-dark-heavy);
+  --glass-border: var(--glass-border-dark);
+  --glass-shadow: var(--glass-shadow-dark);
+}
+
+/* Base styles */
+* {
+  border-color: theme('colors.slate.200');
+  scroll-behavior: smooth;
+}
+
+*::selection {
+  background: theme('colors.primary.500');
+  color: white;
+}
+
+html {
+  font-feature-settings: 'cv11', 'ss01';
+  font-variation-settings: 'opsz' 32;
+}
+
+body {
+  @apply font-sans text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-900;
+  font-feature-settings: 'rlig' 1, 'calt' 1, 'ss01' 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Disable zoom on mobile inputs */
+@media screen and (max-width: 768px) {
+  input[type='text'],
+  input[type='email'],
+  input[type='password'],
+  input[type='number'],
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100 dark:bg-gray-800;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 dark:bg-gray-600 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-400 dark:bg-gray-500;
+}
+
+/* Focus styles */
+:focus {
+  outline: 2px solid theme('colors.primary.500');
+  outline-offset: 2px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --glass-bg-light: rgba(255, 255, 255, 0.9);
+    --glass-bg-medium: rgba(255, 255, 255, 0.95);
+    --glass-border: rgba(0, 0, 0, 0.5);
+  }
+  
+  .dark {
+    --glass-bg-light: rgba(0, 0, 0, 0.9);
+    --glass-bg-medium: rgba(0, 0, 0, 0.95);
+    --glass-border: rgba(255, 255, 255, 0.5);
+  }
+}
+
+/* Print styles */
+@media print {
+  * {
+    background: transparent !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  
+  .no-print {
+    display: none !important;
+  }
+  
+  a, a:visited {
+    text-decoration: underline;
+  }
+  
+  a[href]:after {
+    content: " (" attr(href) ")";
+  }
+  
+  abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
+  
+  pre, blockquote {
+    border: 1px solid #999;
+    page-break-inside: avoid;
+  }
+  
+  thead {
+    display: table-header-group;
+  }
+  
+  tr, img {
+    page-break-inside: avoid;
+  }
+  
+  img {
+    max-width: 100% !important;
+  }
+  
+  @page {
+    margin: 0.5in;
+  }
+  
+  p, h2, h3 {
+    orphans: 3;
+    widows: 3;
+  }
+  
+  h2, h3 {
+    page-break-after: avoid;
+  }
+}
+
+/* Utility classes for animations */
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.animate-fade-in-down {
+  animation: fadeInDown 0.5s ease-out;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.3s ease-out;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.3s ease-out;
+}
+
+.animate-bounce-in {
+  animation: bounceIn 0.6s var(--spring-easing);
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+/* Hover effects */
+.hover-lift {
+  transition: transform 0.3s var(--smooth-easing);
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+}
+
+.hover-magnetic {
+  transition: transform 0.3s var(--smooth-easing);
+}
+
+.hover-magnetic:hover {
+  transform: translateY(-2px) scale(1.02);
+}
+
+.hover-glow {
+  transition: box-shadow 0.3s var(--smooth-easing);
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 30px rgba(0, 102, 255, 0.3);
+}
+
+/* Text effects */
+.text-gradient {
+  background: var(--text-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-glow {
+  text-shadow: 0 0 10px currentColor;
+}
+
+/* Background patterns */
+.bg-pattern-dots {
+  background-image: radial-gradient(circle, rgba(0, 102, 255, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.bg-pattern-grid {
+  background-image: 
+    linear-gradient(rgba(0, 102, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 102, 255, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.bg-mesh-gradient {
+  background: radial-gradient(circle at 20% 50%, rgba(0, 102, 255, 0.3) 0%, transparent 50%),
+              radial-gradient(circle at 80% 20%, rgba(99, 102, 241, 0.3) 0%, transparent 50%),
+              radial-gradient(circle at 40% 80%, rgba(168, 85, 247, 0.3) 0%, transparent 50%);
+}
+
+/* Loading states */
+.skeleton {
+  @apply animate-pulse bg-gray-200 dark:bg-gray-700 rounded;
+}
+
+.skeleton-text {
+  @apply skeleton h-4 mb-2;
+}
+
+.skeleton-title {
+  @apply skeleton h-6 mb-4 w-3/4;
+}
+
+.skeleton-avatar {
+  @apply skeleton h-12 w-12 rounded-full;
+}
+
+/* Error states */
+.error-shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+/* Success states */
+.success-bounce {
+  animation: successBounce 0.6s var(--spring-easing);
+}
+
+@keyframes successBounce {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+/* Form enhancements */
+.form-floating {
+  @apply relative;
+}
+
+.form-floating > label {
+  @apply absolute left-3 top-3 text-gray-500 transition-all duration-200 pointer-events-none;
+}
+
+.form-floating > input:focus + label,
+.form-floating > input:not(:placeholder-shown) + label,
+.form-floating > textarea:focus + label,
+.form-floating > textarea:not(:placeholder-shown) + label {
+  @apply text-xs -top-2 left-2 bg-white dark:bg-gray-900 px-1 text-primary-600;
+}
+
+/* CTA Enhancements */
+.cta-pulse {
+  animation: ctaPulse 2s ease-in-out infinite;
+}
+
+@keyframes ctaPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 107, 53, 0.4); }
+  50% { box-shadow: 0 0 0 10px rgba(255, 107, 53, 0); }
+}
