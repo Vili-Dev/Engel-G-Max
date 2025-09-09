@@ -11,19 +11,19 @@
 - [ ] Noter les identifiants du projet
 
 #### Authentication
-- [ x] Activer Authentication dans Firebase Console
-- [ x] Activer les fournisseurs :
-  - [ x] Email/Password
+- [x] Activer Authentication dans Firebase Console
+- [x] Activer les fournisseurs :
+  - [x] Email/Password
   - [ ] Google (optionnel)
   - [ ] Facebook (optionnel)
-- [ x] Configurer les domaines autorisés dans Authentication > Settings
+- [x] Configurer les domaines autorisés dans Authentication > Settings
 
 #### Firestore Database
-- [ x] Créer une base de données Firestore
-- [ x] Choisir le mode "production"
-- [ x] Sélectionner la région (europe-west1 pour la France)
+- [x] Créer une base de données Firestore
+- [x] Choisir le mode "production"
+- [x] Sélectionner la région (europe-west1 pour la France)
 - [x] ~~Copier les règles de sécurité depuis~~ `/firestore.rules` (fait)
-- [ x] Créer les collections de base :
+- [x] Créer les collections de base :
   ```
   - users/
   - blog_posts/
@@ -62,10 +62,10 @@ CLOUDINARY_API_SECRET=ton_api_secret
   ```
 
 #### Hosting (si hébergement Firebase)
-- [ ] Activer Firebase Hosting
-- [ ] Installer Firebase CLI : `npm install -g firebase-tools`
-- [ ] Se connecter : `firebase login`
-- [ ] Initialiser : `firebase init hosting`
+- [x] Activer Firebase Hosting
+- [x] Installer Firebase CLI : `npm install -g firebase-tools`
+- [x] Se connecter : `firebase login`
+- [x] Initialiser : `firebase init hosting`
 
 #### Configuration des clés
 - [ ] Aller dans Project Settings > General

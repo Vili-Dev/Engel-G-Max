@@ -17,6 +17,7 @@ import {
 } from '../utils/ecommerce/stripeConfig';
 import { useAuth } from './useAuth';
 import { useAnalytics } from './useAnalytics';
+import { UserDataService } from '../services/firebase/userData';
 
 interface CartItem {
   product: GMaxingProduct;
@@ -129,58 +130,128 @@ export const useEcommerce = (): UseEcommerceReturn => {
   }, [state.cart, state.wishlist, user]);
 
   /**
-   * Charger les données utilisateur depuis localStorage
+   * Charger les données utilisateur depuis Firestore
    */
-  const loadUserData = useCallback(() => {
+  const loadUserData = useCallback(async () => {
     if (!user) return;
 
     try {
-      const savedCart = localStorage.getItem(`gmax-cart-${user.uid}`);
-      const savedWishlist = localStorage.getItem(`gmax-wishlist-${user.uid}`);
-      const savedHistory = localStorage.getItem(`gmax-history-${user.uid}`);
-
-      if (savedCart) {
-        const cartData = JSON.parse(savedCart);
-        // Convertir les dates
-        const cart = cartData.map((item: any) => ({
-          ...item,
-          addedAt: new Date(item.addedAt)
+      setState(prev => ({ ...prev, isLoading: true }));
+      
+      // Migrate from localStorage if needed
+      await UserDataService.migrateFromLocalStorage(user.uid);
+      
+      // Load data from Firestore
+      const userData = await UserDataService.getUserData(user.uid);
+      
+      if (userData) {
+        // Convert cart data to match our interface
+        const cart = userData.cart.map(item => ({
+          product: getProductById(item.id) || {
+            id: item.id,
+            name: item.name,
+            price: item.price,
+            category: item.category || '',
+            description: '',
+            features: [],
+            isPopular: false,
+            stripePriceId: '',
+            image: item.image
+          } as GMaxingProduct,
+          quantity: item.quantity,
+          addedAt: item.addedAt
         }));
-        setState(prev => ({ ...prev, cart }));
-      }
 
-      if (savedWishlist) {
-        const wishlist = JSON.parse(savedWishlist);
-        setState(prev => ({ ...prev, wishlist }));
-      }
+        // Convert wishlist (just product IDs)
+        const wishlist = userData.wishlist.map(item => item.id);
 
-      if (savedHistory) {
-        const historyData = JSON.parse(savedHistory);
-        const purchaseHistory = historyData.map((item: any) => ({
-          ...item,
-          date: new Date(item.date)
+        // Convert purchase history
+        const purchaseHistory = userData.purchaseHistory.map(purchase => ({
+          id: purchase.orderId,
+          productId: purchase.items[0]?.id || '',
+          productName: purchase.items[0]?.name || '',
+          amount: purchase.total,
+          currency: 'EUR',
+          date: purchase.purchaseDate,
+          status: purchase.status as 'completed' | 'pending' | 'failed' | 'refunded',
+          stripeSessionId: purchase.orderId
         }));
-        setState(prev => ({ ...prev, purchaseHistory }));
-      }
 
-      console.log('📱 Données e-commerce chargées pour:', user.uid);
+        setState(prev => ({
+          ...prev,
+          cart,
+          wishlist,
+          purchaseHistory,
+          isLoading: false
+        }));
+        
+        console.log('🔥 Données e-commerce chargées depuis Firestore pour:', user.uid);
+      } else {
+        setState(prev => ({ ...prev, isLoading: false }));
+      }
     } catch (error) {
-      console.warn('⚠️ Erreur chargement données e-commerce:', error);
+      console.warn('⚠️ Erreur chargement données e-commerce depuis Firestore:', error);
+      setState(prev => ({ ...prev, isLoading: false, error: 'Erreur de chargement des données' }));
     }
   }, [user]);
 
   /**
-   * Sauvegarder les données utilisateur dans localStorage
+   * Sauvegarder les données utilisateur dans Firestore
    */
-  const saveUserData = useCallback(() => {
+  const saveUserData = useCallback(async () => {
     if (!user) return;
 
     try {
-      localStorage.setItem(`gmax-cart-${user.uid}`, JSON.stringify(state.cart));
-      localStorage.setItem(`gmax-wishlist-${user.uid}`, JSON.stringify(state.wishlist));
-      localStorage.setItem(`gmax-history-${user.uid}`, JSON.stringify(state.purchaseHistory));
+      // Convert cart to UserDataService format
+      const cart = state.cart.map(item => ({
+        id: item.product.id,
+        name: item.product.name,
+        price: item.product.price,
+        quantity: item.quantity,
+        image: item.product.image,
+        category: item.product.category,
+        addedAt: item.addedAt
+      }));
+
+      // Convert wishlist to UserDataService format
+      const wishlist = state.wishlist.map(productId => {
+        const product = getProductById(productId);
+        return {
+          id: productId,
+          name: product?.name || '',
+          price: product?.price || 0,
+          image: product?.image,
+          category: product?.category,
+          addedAt: new Date()
+        };
+      });
+
+      // Convert purchase history
+      const purchaseHistory = state.purchaseHistory.map(purchase => ({
+        orderId: purchase.id,
+        items: [{
+          id: purchase.productId,
+          name: purchase.productName,
+          price: purchase.amount,
+          quantity: 1,
+          addedAt: new Date()
+        }],
+        total: purchase.amount,
+        purchaseDate: purchase.date,
+        status: purchase.status,
+        paymentMethod: 'stripe'
+      }));
+
+      await UserDataService.updateUserCart(user.uid, cart);
+      await UserDataService.updateUserWishlist(user.uid, wishlist);
+      
+      // Only save purchase history if it exists
+      if (purchaseHistory.length > 0) {
+        await UserDataService.saveUserData(user.uid, { purchaseHistory });
+      }
+      
     } catch (error) {
-      console.warn('⚠️ Erreur sauvegarde données e-commerce:', error);
+      console.warn('⚠️ Erreur sauvegarde données e-commerce dans Firestore:', error);
     }
   }, [user, state.cart, state.wishlist, state.purchaseHistory]);
 

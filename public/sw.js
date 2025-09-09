@@ -101,6 +101,11 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
+  // Ignorer les requêtes Firebase et API externes
+  if (isFirebaseRequest(request.url) || request.method !== 'GET') {
+    return;
+  }
+
   // Stratégie différente selon le type de ressource
   if (isImageRequest(request.url)) {
     event.respondWith(handleImageRequest(request));
@@ -112,6 +117,21 @@ self.addEventListener('fetch', (event) => {
     event.respondWith(handleStaleWhileRevalidate(request));
   }
 });
+
+// Vérifier si c'est une requête Firebase ou API externe
+function isFirebaseRequest(url) {
+  const firebaseDomains = [
+    'googleapis.com',
+    'firebaseio.com',
+    'firebaseapp.com',
+    'google-analytics.com',
+    'googletagmanager.com',
+    'stripe.com',
+    'js.stripe.com'
+  ];
+  
+  return firebaseDomains.some(domain => url.includes(domain));
+}
 
 // Vérifier si c'est une requête d'image
 function isImageRequest(url) {
@@ -202,8 +222,8 @@ async function handleStaleWhileRevalidate(request) {
     const cachedResponse = await caches.match(request);
     
     const networkResponsePromise = fetch(request).then(networkResponse => {
-      // Mettre à jour le cache en arrière-plan
-      if (networkResponse.status === 200) {
+      // Ne pas mettre en cache les requêtes POST, PUT, DELETE ou les erreurs
+      if (request.method === 'GET' && networkResponse.status === 200) {
         const responseToCache = networkResponse.clone(); // Cloner avant utilisation
         caches.open(DYNAMIC_CACHE).then(c => c.put(request, responseToCache));
       }

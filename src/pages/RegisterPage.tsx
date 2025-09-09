@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { EyeIcon, EyeSlashIcon, ArrowRightIcon, CheckIcon } from '@heroicons/react/24/outline';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import GlassCard from '../components/ui/GlassCard';
 import Button from '../components/ui/Button';
+import { useAuth } from '../hooks/useAuth';
+import toast from 'react-hot-toast';
 
 const RegisterPage: React.FC = () => {
+  const navigate = useNavigate();
+  const { signUp } = useAuth();
+  
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -28,25 +33,59 @@ const RegisterPage: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    // Validation
     if (formData.password !== formData.confirmPassword) {
-      alert('Les mots de passe ne correspondent pas');
+      toast.error('Les mots de passe ne correspondent pas');
       return;
     }
 
     if (!acceptTerms) {
-      alert('Veuillez accepter les conditions d\'utilisation');
+      toast.error('Veuillez accepter les conditions d\'utilisation');
+      return;
+    }
+
+    if (formData.password.length < 6) {
+      toast.error('Le mot de passe doit contenir au moins 6 caractères');
+      return;
+    }
+
+    if (!formData.firstName.trim() || !formData.lastName.trim()) {
+      toast.error('Veuillez remplir tous les champs');
       return;
     }
 
     setLoading(true);
     
-    // TODO: Implement registration logic
-    console.log('Registration attempt:', formData);
-    
-    // Simulate API call
-    setTimeout(() => {
+    try {
+      console.log('🔐 Tentative d\'inscription:', {
+        email: formData.email,
+        name: `${formData.firstName} ${formData.lastName}`
+      });
+      
+      // Créer le compte avec Firebase
+      await signUp(
+        formData.email, 
+        formData.password, 
+        `${formData.firstName} ${formData.lastName}`
+      );
+      
+      // Toast de succès déjà géré dans le hook useAuth
+      
+      // Rediriger vers la page de connexion
+      setTimeout(() => {
+        navigate('/login', { 
+          state: { 
+            message: 'Compte créé avec succès ! Vérifiez vos emails pour confirmer votre adresse.' 
+          } 
+        });
+      }, 2000);
+      
+    } catch (error: any) {
+      console.error('❌ Erreur d\'inscription:', error);
+      // Le toast d'erreur est déjà géré dans le hook useAuth
+    } finally {
       setLoading(false);
-    }, 2000);
+    }
   };
 
   const passwordStrength = (password: string) => {

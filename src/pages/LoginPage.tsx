@@ -1,27 +1,61 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { EyeIcon, EyeSlashIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import GlassCard from '../components/ui/GlassCard';
 import Button from '../components/ui/Button';
+import { useAuth } from '../hooks/useAuth';
+import toast from 'react-hot-toast';
 
 const LoginPage: React.FC = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { signIn, isAuthenticated } = useAuth();
+  
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  // Afficher un message si on vient de la page d'inscription
+  useEffect(() => {
+    if (location.state?.message) {
+      toast.success(location.state.message);
+    }
+  }, [location.state]);
+
+  // Rediriger si déjà connecté
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/');
+    }
+  }, [isAuthenticated, navigate]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!email.trim() || !password.trim()) {
+      toast.error('Veuillez remplir tous les champs');
+      return;
+    }
+
     setLoading(true);
     
-    // TODO: Implement authentication logic
-    console.log('Login attempt:', { email, password });
-    
-    // Simulate API call
-    setTimeout(() => {
+    try {
+      console.log('🔐 Tentative de connexion:', { email });
+      
+      await signIn(email, password);
+      
+      // Toast de succès déjà géré dans le hook useAuth
+      
+      // Redirection automatique gérée par useEffect
+      
+    } catch (error: any) {
+      console.error('❌ Erreur de connexion:', error);
+      // Le toast d'erreur est déjà géré dans le hook useAuth
+    } finally {
       setLoading(false);
-    }, 2000);
+    }
   };
 
   return (

@@ -3,21 +3,8 @@
  * Système d'automatisation newsletter avec SendGrid pour Engel Garcia Gomez
  */
 
-import { db } from '../firebase/firebase';
-import { 
-  collection, 
-  addDoc, 
-  query, 
-  where, 
-  getDocs, 
-  updateDoc,
-  doc,
-  serverTimestamp,
-  orderBy,
-  limit,
-  Timestamp,
-  deleteDoc
-} from 'firebase/firestore';
+// Note: Firebase integration disabled - using local storage for demo
+// import { db } from '../firebase/firebase';
 
 // Types et interfaces
 export interface NewsletterSubscriber {
@@ -114,7 +101,7 @@ export interface NewsletterAutomation {
 }
 
 class NewsletterEngine {
-  private apiKey: string = process.env.REACT_APP_SENDGRID_API_KEY || 'demo_key';
+  private apiKey: string = import.meta.env.VITE_SENDGRID_API_KEY || 'demo_key';
   private fromEmail: string = 'contact@engelgmax.com';
   private fromName: string = 'Engel Garcia Gomez - G-Maxing';
   
@@ -182,34 +169,36 @@ class NewsletterEngine {
         }
       };
 
-      // Sauvegarder en Firebase
-      const docRef = await addDoc(collection(db, 'newsletter_subscribers'), {
+      // Sauvegarder localement (démo - remplacer par vraie DB)
+      const subscriberId = `sub_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+      const subscriberData = {
+        id: subscriberId,
         ...subscriber,
-        subscribedAt: serverTimestamp(),
-        createdAt: serverTimestamp(),
-        updatedAt: serverTimestamp()
-      });
+        subscribedAt: new Date(),
+        createdAt: new Date(),
+        updatedAt: new Date()
+      };
+      
+      // Stocker en localStorage pour la démo
+      const existingData = localStorage.getItem('newsletter_subscribers') || '[]';
+      const subscribers = JSON.parse(existingData);
+      subscribers.push(subscriberData);
+      localStorage.setItem('newsletter_subscribers', JSON.stringify(subscribers));
 
-      // Ajouter à SendGrid
+      // Ajouter à SendGrid (simulé)
       const sendgridContactId = await this.addToSendGrid(subscriber);
-      if (sendgridContactId) {
-        await updateDoc(doc(db, 'newsletter_subscribers', docRef.id), {
-          sendgridContactId,
-          updatedAt: serverTimestamp()
-        });
-      }
 
-      // Envoyer email de confirmation
-      await this.sendConfirmationEmail(docRef.id);
+      // Envoyer email de confirmation (simulé)
+      await this.sendConfirmationEmail(subscriberId);
 
-      // Déclencher l'automation de bienvenue
-      await this.triggerAutomation('subscription', { subscriberId: docRef.id });
+      // Déclencher l'automation de bienvenue (simulé)
+      await this.triggerAutomation('subscription', { subscriberId });
 
       console.log('✅ Nouvel abonné ajouté:', email);
       
       return {
         success: true,
-        subscriberId: docRef.id,
+        subscriberId: subscriberId,
         message: 'Abonnement enregistré ! Vérifiez votre email pour confirmer.'
       };
 
@@ -238,12 +227,16 @@ class NewsletterEngine {
         return false;
       }
 
-      // Marquer comme confirmé
-      await updateDoc(doc(db, 'newsletter_subscribers', subscriberId), {
-        status: 'confirmed',
-        confirmedAt: serverTimestamp(),
-        updatedAt: serverTimestamp()
-      });
+      // Marquer comme confirmé (localStorage pour la démo)
+      const existingData = localStorage.getItem('newsletter_subscribers') || '[]';
+      const subscribers = JSON.parse(existingData);
+      const subscriberIndex = subscribers.findIndex((s: any) => s.id === subscriberId);
+      if (subscriberIndex !== -1) {
+        subscribers[subscriberIndex].status = 'confirmed';
+        subscribers[subscriberIndex].confirmedAt = new Date();
+        subscribers[subscriberIndex].updatedAt = new Date();
+        localStorage.setItem('newsletter_subscribers', JSON.stringify(subscribers));
+      }
 
       // Mettre à jour SendGrid
       await this.updateSendGridContact(subscriber.sendgridContactId!, { status: 'confirmed' });
@@ -510,20 +503,10 @@ class NewsletterEngine {
 
   private async getSubscriberByEmail(email: string): Promise<NewsletterSubscriber | null> {
     try {
-      const q = query(
-        collection(db, 'newsletter_subscribers'), 
-        where('email', '==', email.toLowerCase().trim()),
-        limit(1)
-      );
-      const querySnapshot = await getDocs(q);
-      
-      if (querySnapshot.empty) return null;
-      
-      const doc = querySnapshot.docs[0];
-      return {
-        id: doc.id,
-        ...doc.data()
-      } as NewsletterSubscriber;
+      const existingData = localStorage.getItem('newsletter_subscribers') || '[]';
+      const subscribers = JSON.parse(existingData);
+      const subscriber = subscribers.find((s: any) => s.email === email.toLowerCase().trim());
+      return subscriber || null;
     } catch (error) {
       console.error('Erreur lors de la récupération de l\'abonné:', error);
       return null;
@@ -532,16 +515,10 @@ class NewsletterEngine {
 
   private async getSubscriberById(id: string): Promise<NewsletterSubscriber | null> {
     try {
-      const docRef = doc(db, 'newsletter_subscribers', id);
-      const docSnap = await getDocs(query(collection(db, 'newsletter_subscribers'), where('__name__', '==', id)));
-      
-      if (docSnap.empty) return null;
-      
-      const document = docSnap.docs[0];
-      return {
-        id: document.id,
-        ...document.data()
-      } as NewsletterSubscriber;
+      const existingData = localStorage.getItem('newsletter_subscribers') || '[]';
+      const subscribers = JSON.parse(existingData);
+      const subscriber = subscribers.find((s: any) => s.id === id);
+      return subscriber || null;
     } catch (error) {
       console.error('Erreur lors de la récupération de l\'abonné par ID:', error);
       return null;
@@ -549,11 +526,15 @@ class NewsletterEngine {
   }
 
   private async reactivateSubscriber(subscriberId: string): Promise<void> {
-    await updateDoc(doc(db, 'newsletter_subscribers', subscriberId), {
-      status: 'confirmed',
-      reactivatedAt: serverTimestamp(),
-      updatedAt: serverTimestamp()
-    });
+    const existingData = localStorage.getItem('newsletter_subscribers') || '[]';
+    const subscribers = JSON.parse(existingData);
+    const subscriberIndex = subscribers.findIndex((s: any) => s.id === subscriberId);
+    if (subscriberIndex !== -1) {
+      subscribers[subscriberIndex].status = 'confirmed';
+      subscribers[subscriberIndex].reactivatedAt = new Date();
+      subscribers[subscriberIndex].updatedAt = new Date();
+      localStorage.setItem('newsletter_subscribers', JSON.stringify(subscribers));
+    }
   }
 
   // SendGrid Mock Methods (à remplacer par les vraies API SendGrid)

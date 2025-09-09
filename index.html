@@ -180,25 +180,25 @@
     @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
   </style>
   
-  <!-- Preload Critical Resources -->
-  <link rel="preload" href="/images/engel-garcia-gomez-hero.jpg" as="image" type="image/jpeg" />
-  <link rel="preload" href="/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin />
+  <!-- Preload Critical Resources (disabled for development) -->
+  <!-- <link rel="preload" href="/images/engel-garcia-gomez-hero.jpg" as="image" type="image/jpeg" /> -->
+  <!-- <link rel="preload" href="/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin /> -->
   
   <!-- Security Headers -->
   <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
+  <!-- X-Frame-Options removed - should be set via HTTP headers -->
   <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
   <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
   
   <!-- Content Security Policy -->
   <meta http-equiv="Content-Security-Policy" content="
-    default-src 'self' https:;
-    script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://js.stripe.com https://firebaseapp.com https://*.firebaseapp.com;
+    default-src 'self' data: blob:;
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://ssl.google-analytics.com https://tagmanager.google.com https://js.stripe.com https://firebaseapp.com https://*.firebaseapp.com https://www.gstatic.com https://apis.google.com;
     style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-    font-src 'self' https://fonts.gstatic.com;
-    img-src 'self' data: https: blob:;
-    connect-src 'self' https://firebaseapp.com https://*.firebaseapp.com https://www.google-analytics.com https://api.stripe.com;
-    frame-src https://js.stripe.com;
+    font-src 'self' https://fonts.gstatic.com data:;
+    img-src 'self' data: blob: https: http:;
+    connect-src 'self' https://*.googleapis.com https://*.firebaseio.com https://*.cloudfunctions.net https://*.firebaseapp.com https://www.google-analytics.com https://region1.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://www.googletagmanager.com https://identitytoolkit.googleapis.com https://firebaseinstallations.googleapis.com https://firebase.googleapis.com https://firestore.googleapis.com https://api.stripe.com https://fonts.gstatic.com wss://*.firebaseio.com;
+    frame-src 'self' https://js.stripe.com https://www.youtube.com;
     object-src 'none';
     base-uri 'self';
     form-action 'self' https://api.stripe.com;
@@ -270,14 +270,19 @@
     
     // Critical performance monitoring
     window.addEventListener('load', function() {
-      // Track Core Web Vitals
-      import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
-        getCLS(console.log);
-        getFID(console.log);
-        getFCP(console.log);
-        getLCP(console.log);
-        getTTFB(console.log);
-      });
+      // Track Core Web Vitals (disabled for development)
+      try {
+        // import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
+        //   getCLS(console.log);
+        //   getFID(console.log);
+        //   getFCP(console.log);
+        //   getLCP(console.log);
+        //   getTTFB(console.log);
+        // });
+        console.log('📊 Web Vitals tracking disabled in development');
+      } catch (error) {
+        console.warn('⚠️ Web Vitals not available');
+      }
     });
     
     // Intersection Observer for scroll animations

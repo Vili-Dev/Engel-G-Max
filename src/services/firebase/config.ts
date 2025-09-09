@@ -6,7 +6,7 @@ import { getFirestore, connectFirestoreEmulator } from 'firebase/firestore';
 import { getFunctions, connectFunctionsEmulator } from 'firebase/functions';
 import { getAnalytics } from 'firebase/analytics';
 
-// Firebase configuration
+// Firebase configuration - Use environment variables only
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
@@ -27,10 +27,11 @@ const requiredEnvVars = [
   'VITE_FIREBASE_APP_ID'
 ];
 
+// Validate Firebase configuration
 const missingVars = requiredEnvVars.filter(varName => !import.meta.env[varName]);
 if (missingVars.length > 0) {
-  console.error('Missing required Firebase environment variables:', missingVars);
-  console.error('Please check your .env file and ensure all Firebase config values are set.');
+  console.error('🚨 Firebase configuration incomplete! Missing environment variables:', missingVars);
+  throw new Error('Firebase configuration is incomplete. Please check your environment variables.');
 }
 
 // Initialize Firebase

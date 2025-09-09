@@ -43,8 +43,10 @@ export class AuthService {
         updatedAt: new Date(),
         preferences: {
           language: 'fr',
+          currency: 'EUR',
           newsletter: true,
           notifications: true,
+          emailMarketing: false,
         },
         fitnessProfile: {
           goals: [],

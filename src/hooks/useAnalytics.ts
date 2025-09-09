@@ -6,6 +6,7 @@
 import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import { businessIntelligence } from '../utils/analytics/businessIntelligence';
 import { useAuth } from './useAuth';
+import { UserDataService } from '../services/firebase/userData';
 
 interface AnalyticsEvent {
   type: 'page_view' | 'protocol_generation' | 'purchase' | 'search' | 'chat_interaction' | 'content_view' | 'button_click' | 'form_submit';
@@ -404,7 +405,25 @@ export const useAnalytics = (): UseAnalyticsReturn => {
         userId: user.uid
       };
 
-      localStorage.setItem(`gmax-analytics-${user.uid}`, JSON.stringify(sessionData));
+      // Save session data to Firestore
+      UserDataService.saveUserAnalytics(user.uid, {
+        currentSession: {
+          sessionId: state.sessionId,
+          startTime: state.sessionStartTime,
+          endTime: new Date(),
+          pageViews: state.pageViews,
+          actions: state.events.map(e => e.type),
+          deviceInfo: {
+            userAgent: navigator.userAgent,
+            screenSize: `${window.screen.width}x${window.screen.height}`,
+            platform: navigator.platform
+          }
+        },
+        lastVisit: new Date(),
+        totalSessions: sessionData.totalSessions
+      }).catch(error => {
+        console.warn('⚠️ Impossible de sauvegarder la session analytics dans Firestore:', error);
+      });
     } catch (error) {
       console.warn('⚠️ Impossible de sauvegarder la session analytics:', error);
     }

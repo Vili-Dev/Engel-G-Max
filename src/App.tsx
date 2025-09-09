@@ -2,6 +2,7 @@ import React, { Suspense, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { AnimatePresence } from 'framer-motion';
+import AuthButton from './components/auth/AuthButton';
 
 // i18n setup - TODO: Create i18n configuration
 // import './i18n';
@@ -20,6 +21,8 @@ const BlogPage = React.lazy(() => import('./pages/BlogPage'));
 const NewsletterPage = React.lazy(() => import('./pages/NewsletterPage'));
 const LoginPage = React.lazy(() => import('./pages/LoginPage'));
 const RegisterPage = React.lazy(() => import('./pages/RegisterPage'));
+const TestAuthPage = React.lazy(() => import('./pages/TestAuthPage'));
+const AdminDashboard = React.lazy(() => import('./pages/AdminDashboard'));
 // ProtocolAccessPage will be created later
 // const ProtocolAccessPage = React.lazy(() => import('./pages/ProtocolAccessPage'));
 // TestimonialsPage will be created later
@@ -201,19 +204,8 @@ const App: React.FC = () => {
                 <a href="/blog" className="text-white hover:text-engel transition">Blog</a>
                 
                 {/* Auth buttons */}
-                <div className="flex items-center space-x-4 ml-8">
-                  <a 
-                    href="/login" 
-                    className="text-white hover:text-engel transition px-4 py-2 rounded-lg border border-white/20 hover:border-engel/50 backdrop-blur-sm"
-                  >
-                    Se connecter
-                  </a>
-                  <a 
-                    href="/register" 
-                    className="bg-gradient-to-r from-engel to-blue-600 text-white px-6 py-2 rounded-lg hover:from-engel/90 hover:to-blue-600/90 transition font-medium"
-                  >
-                    S'inscrire
-                  </a>
+                <div className="ml-8">
+                  <AuthButton />
                 </div>
               </div>
             </div>
@@ -257,6 +249,11 @@ const App: React.FC = () => {
                     {/* Auth routes */}
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />
+                    <Route path="/test-auth" element={<TestAuthPage />} />
+                    
+                    {/* Admin routes */}
+                    <Route path="/admin" element={<AdminDashboard />} />
+                    <Route path="/admin/dashboard" element={<AdminDashboard />} />
                     
                     {/* French routes */}
                     <Route path="/fr" element={<HomePage />} />

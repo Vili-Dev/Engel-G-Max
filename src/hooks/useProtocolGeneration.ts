@@ -6,6 +6,7 @@ import {
 } from '../utils/protocols/protocolGenerator';
 import { gMaxingTemplateLibrary } from '../utils/protocols/templateLibrary';
 import { User } from '../types';
+import { UserDataService } from '../services/firebase/userData';
 
 interface ProtocolGenerationParams {
   userId: string;
@@ -46,24 +47,56 @@ export const useProtocolGeneration = (user: User | null) => {
     setState(prev => ({ ...prev, availableTemplates: templates }));
   }, []);
 
-  // Load saved protocols from localStorage
+  // Load saved protocols from Firestore
   useEffect(() => {
     if (user) {
-      const saved = localStorage.getItem(`gmax-protocols-${user.id}`);
-      if (saved) {
-        try {
-          setSavedProtocols(JSON.parse(saved));
-        } catch (error) {
-          console.warn('Failed to load saved protocols:', error);
-        }
-      }
+      loadSavedProtocols();
     }
   }, [user]);
 
-  // Save protocols to localStorage
-  const saveProtocolsToStorage = useCallback((protocols: GeneratedProtocol[]) => {
-    if (user) {
-      localStorage.setItem(`gmax-protocols-${user.id}`, JSON.stringify(protocols));
+  const loadSavedProtocols = useCallback(async () => {
+    if (!user) return;
+
+    try {
+      // Migrate from localStorage first
+      await UserDataService.migrateFromLocalStorage(user.uid || user.id);
+      
+      // Load from Firestore
+      const userData = await UserDataService.getUserData(user.uid || user.id);
+      if (userData && userData.protocols) {
+        const protocols = userData.protocols.map(protocol => ({
+          ...protocol,
+          userId: user.uid || user.id,
+          createdAt: protocol.createdAt,
+          lastModified: protocol.updatedAt || protocol.createdAt
+        }));
+        setSavedProtocols(protocols as GeneratedProtocol[]);
+        console.log('🔥 Loaded protocols from Firestore:', protocols.length);
+      }
+    } catch (error) {
+      console.warn('Failed to load saved protocols from Firestore:', error);
+    }
+  }, [user]);
+
+  // Save protocols to Firestore
+  const saveProtocolsToStorage = useCallback(async (protocols: GeneratedProtocol[]) => {
+    if (!user) return;
+
+    try {
+      const userProtocols = protocols.map(protocol => ({
+        id: protocol.id,
+        name: protocol.name,
+        type: protocol.type,
+        content: protocol,
+        createdAt: protocol.createdAt || new Date(),
+        updatedAt: protocol.lastModified || new Date(),
+        isActive: true
+      }));
+      
+      await UserDataService.updateUserProtocols(user.uid || user.id, userProtocols);
+      console.log('💾 Saved protocols to Firestore:', userProtocols.length);
+    } catch (error) {
+      console.warn('Failed to save protocols to Firestore:', error);
     }
   }, [user]);
 
