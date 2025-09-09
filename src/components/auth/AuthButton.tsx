@@ -2,13 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { 
   UserIcon, 
-  ArrowRightEndOnRectangleIcon
+  ArrowRightEndOnRectangleIcon,
+  CogIcon
 } from '@heroicons/react/24/outline';
 import { useAuth } from '../../hooks/useAuth';
 import Button from '../ui/Button';
 
 const AuthButton: React.FC = () => {
-  const { isAuthenticated, signOut, isLoading } = useAuth();
+  const { user, isAuthenticated, signOut, isLoading } = useAuth();
 
   const handleSignOut = async () => {
     try {
@@ -28,10 +29,28 @@ const AuthButton: React.FC = () => {
   }
 
   // Affichage si l'utilisateur est connecté
-  if (isAuthenticated) {
+  if (isAuthenticated && user) {
+    const isAdmin = user.role === 'admin';
+    
     return (
       <div className="flex items-center space-x-3">
-        <span className="text-green-400 text-sm font-medium">Connecté</span>
+        <span className="text-green-400 text-sm font-medium">
+          Connecté{isAdmin && <span className="text-yellow-400 ml-1">(Admin)</span>}
+        </span>
+        
+        {/* Bouton Admin visible pour les admins */}
+        {isAdmin && (
+          <Link to="/admin">
+            <Button
+              size="sm"
+              className="bg-gradient-to-r from-yellow-500/20 to-orange-500/20 border border-yellow-500/30 text-yellow-300 hover:from-yellow-500/30 hover:to-orange-500/30 transition-all duration-300"
+            >
+              <CogIcon className="w-4 h-4 mr-2" />
+              <span className="text-sm">Dashboard Admin</span>
+            </Button>
+          </Link>
+        )}
+        
         <button
           onClick={handleSignOut}
           className="flex items-center space-x-2 px-4 py-2 bg-red-500/20 border border-red-500/30 rounded-lg text-red-300 hover:bg-red-500/30 transition-all duration-300"
