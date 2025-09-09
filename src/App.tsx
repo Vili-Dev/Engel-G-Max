@@ -1,7 +1,8 @@
-import React, { Suspense, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import React, { Suspense, useEffect, useState } from 'react';
+import { Routes, Route, Link } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import AuthButton from './components/auth/AuthButton';
 
 // i18n setup - TODO: Create i18n configuration
@@ -98,6 +99,7 @@ const App: React.FC = () => {
   // Simplified for now - TODO: Add hooks back when they exist
   // const { user, loading: authLoading } = useAuth();
   // const { updateSEO } = useSEO();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   // const { t, language } = useTranslation();
   
   const user = null; // Temporary - will be replaced with real auth
@@ -197,18 +199,81 @@ const App: React.FC = () => {
               <div className="text-2xl font-bold text-engel">
                 EngelGMax
               </div>
+              
+              {/* Desktop Navigation */}
               <div className="hidden md:flex items-center space-x-8">
-                <a href="/" className="text-white hover:text-engel transition">Accueil</a>
-                <a href="/about" className="text-white hover:text-engel transition">À propos</a>
-                <a href="/shop" className="text-white hover:text-engel transition">Boutique</a>
-                <a href="/blog" className="text-white hover:text-engel transition">Blog</a>
+                <Link to="/" className="text-white hover:text-engel transition">Accueil</Link>
+                <Link to="/about" className="text-white hover:text-engel transition">À propos</Link>
+                <Link to="/shop" className="text-white hover:text-engel transition">Boutique</Link>
+                <Link to="/blog" className="text-white hover:text-engel transition">Blog</Link>
                 
                 {/* Auth buttons */}
                 <div className="ml-8">
                   <AuthButton />
                 </div>
               </div>
+
+              {/* Mobile menu button */}
+              <div className="md:hidden flex items-center space-x-4">
+                <div className="scale-75">
+                  <AuthButton />
+                </div>
+                <button
+                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                  className="text-white hover:text-engel transition-colors"
+                >
+                  {mobileMenuOpen ? (
+                    <XMarkIcon className="h-6 w-6" />
+                  ) : (
+                    <Bars3Icon className="h-6 w-6" />
+                  )}
+                </button>
+              </div>
             </div>
+
+            {/* Mobile Navigation Menu */}
+            <AnimatePresence>
+              {mobileMenuOpen && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="md:hidden border-t border-white/10 mt-2 pt-4 pb-4"
+                >
+                  <div className="flex flex-col space-y-4">
+                    <Link 
+                      to="/" 
+                      className="text-white hover:text-engel transition px-4 py-2 rounded-lg hover:bg-white/10"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Accueil
+                    </Link>
+                    <Link 
+                      to="/about" 
+                      className="text-white hover:text-engel transition px-4 py-2 rounded-lg hover:bg-white/10"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      À propos
+                    </Link>
+                    <Link 
+                      to="/shop" 
+                      className="text-white hover:text-engel transition px-4 py-2 rounded-lg hover:bg-white/10"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Boutique
+                    </Link>
+                    <Link 
+                      to="/blog" 
+                      className="text-white hover:text-engel transition px-4 py-2 rounded-lg hover:bg-white/10"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Blog
+                    </Link>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </nav>
 
