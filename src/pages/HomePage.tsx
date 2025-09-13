@@ -222,7 +222,7 @@ const HomePage: React.FC = () => {
       {/* Hero Section */}
       <section 
         ref={heroRef}
-        className="relative min-h-screen flex items-center justify-center overflow-hidden"
+        className="relative min-h-screen flex items-center justify-center overflow-hidden pb-20"
       >
         {/* Background Video/Image */}
         <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900">
@@ -283,7 +283,7 @@ const HomePage: React.FC = () => {
               transition={{ duration: 0.8, delay: 0.4 }}
             >
               <span className="bg-gradient-to-r from-primary-400 to-primary-600 bg-clip-text text-transparent">
-                Engel Garcia Gomez
+                EngelGMax
               </span>
             </motion.h1>
 
@@ -337,6 +337,7 @@ const HomePage: React.FC = () => {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={heroInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.8, delay: 1.2 }}
+            className="mt-12"
           >
             <GlassCard className="inline-block p-4 hover:scale-105 transition-transform duration-300">
               <p className="text-primary-300 font-medium mb-2">

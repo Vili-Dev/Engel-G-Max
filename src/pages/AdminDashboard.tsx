@@ -533,23 +533,23 @@ const AdminDashboard: React.FC = () => {
           </div>
         </div>
 
-        {/* Navigation par onglets */}
+        {/* Navigation par onglets - Responsive */}
         <div className="glass-card p-1 mb-8">
-          <nav className="flex space-x-1">
+          <nav className="flex flex-wrap gap-1 sm:gap-2">
             {tabs.map((tab) => {
               const IconComponent = tab.icon;
               return (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id as any)}
-                  className={`flex items-center space-x-2 px-4 py-3 rounded-lg font-medium transition-all ${
+                  className={`flex items-center space-x-1 sm:space-x-2 px-2 sm:px-4 py-2 sm:py-3 rounded-lg font-medium transition-all text-xs sm:text-sm ${
                     activeTab === tab.id
                       ? 'bg-blue-500 text-white shadow-lg'
                       : 'text-gray-300 hover:text-white hover:bg-white/10'
                   }`}
                 >
-                  <IconComponent className="h-5 w-5" />
-                  <span className="hidden sm:inline">{tab.label}</span>
+                  <IconComponent className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
+                  <span className="hidden xs:inline sm:inline">{tab.label}</span>
                 </button>
               );
             })}
