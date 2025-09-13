@@ -24,6 +24,8 @@ const LoginPage = React.lazy(() => import('./pages/LoginPage'));
 const RegisterPage = React.lazy(() => import('./pages/RegisterPage'));
 const TestAuthPage = React.lazy(() => import('./pages/TestAuthPage'));
 const AdminDashboard = React.lazy(() => import('./pages/AdminDashboard'));
+const ProtocolsPage = React.lazy(() => import('./pages/ProtocolsPage'));
+const ProtocolDetailPage = React.lazy(() => import('./pages/ProtocolDetailPage'));
 // ProtocolAccessPage will be created later
 // const ProtocolAccessPage = React.lazy(() => import('./pages/ProtocolAccessPage'));
 // TestimonialsPage will be created later
@@ -204,6 +206,7 @@ const App: React.FC = () => {
               <div className="hidden md:flex items-center space-x-8">
                 <Link to="/" className="text-white hover:text-engel transition">Accueil</Link>
                 <Link to="/about" className="text-white hover:text-engel transition">À propos</Link>
+                <Link to="/protocols" className="text-white hover:text-engel transition">Protocoles</Link>
                 <Link to="/shop" className="text-white hover:text-engel transition">Boutique</Link>
                 <Link to="/blog" className="text-white hover:text-engel transition">Blog</Link>
                 
@@ -213,14 +216,12 @@ const App: React.FC = () => {
                 </div>
               </div>
 
-              {/* Mobile menu button */}
-              <div className="md:hidden flex items-center space-x-4">
-                <div className="scale-75">
-                  <AuthButton />
-                </div>
+              {/* Mobile menu button - Hidden on desktop */}
+              <div className="block md:hidden">
                 <button
                   onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                   className="text-white hover:text-engel transition-colors"
+                  aria-label="Menu mobile"
                 >
                   {mobileMenuOpen ? (
                     <XMarkIcon className="h-6 w-6" />
@@ -257,6 +258,13 @@ const App: React.FC = () => {
                       À propos
                     </Link>
                     <Link 
+                      to="/protocols" 
+                      className="text-white hover:text-engel transition px-4 py-2 rounded-lg hover:bg-white/10"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Protocoles
+                    </Link>
+                    <Link 
                       to="/shop" 
                       className="text-white hover:text-engel transition px-4 py-2 rounded-lg hover:bg-white/10"
                       onClick={() => setMobileMenuOpen(false)}
@@ -270,6 +278,13 @@ const App: React.FC = () => {
                     >
                       Blog
                     </Link>
+                    
+                    {/* Auth buttons for mobile */}
+                    <div className="border-t border-white/10 pt-4 mt-4">
+                      <div className="px-4">
+                        <AuthButton />
+                      </div>
+                    </div>
                   </div>
                 </motion.div>
               )}
@@ -291,7 +306,8 @@ const App: React.FC = () => {
                     <Route path="/services" element={<ProductsPage />} />
                     <Route path="/coaching" element={<ProductsPage />} />
                     <Route path="/coaching-g-maxing" element={<ProductsPage />} />
-                    <Route path="/protocols" element={<ProductsPage />} />
+                    <Route path="/protocols" element={<ProtocolsPage />} />
+                    <Route path="/protocols/:slug" element={<ProtocolDetailPage />} />
                     <Route path="/transformation-results" element={<AboutPage />} />
                     <Route path="/shop" element={<ProductsPage />} />
                     <Route path="/shop/:id" element={<ProductsPage />} />
@@ -327,7 +343,8 @@ const App: React.FC = () => {
                     <Route path="/fr/services" element={<ProductsPage />} />
                     <Route path="/fr/coaching" element={<ProductsPage />} />
                     <Route path="/fr/coaching-g-maxing" element={<ProductsPage />} />
-                    <Route path="/fr/protocoles" element={<ProductsPage />} />
+                    <Route path="/fr/protocoles" element={<ProtocolsPage />} />
+                    <Route path="/fr/protocoles/:slug" element={<ProtocolDetailPage />} />
                     <Route path="/fr/transformation-physique" element={<AboutPage />} />
                     <Route path="/fr/boutique" element={<ProductsPage />} />
                     <Route path="/fr/boutique/:id" element={<ProductsPage />} />

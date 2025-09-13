@@ -68,9 +68,9 @@ CLOUDINARY_API_SECRET=ton_api_secret
 - [x] Initialiser : `firebase init hosting`
 
 #### Configuration des clés
-- [ ] Aller dans Project Settings > General
-- [ ] Copier la configuration Firebase
-- [ ] Créer le fichier `.env.production` :
+- [x] Aller dans Project Settings > General
+- [x] Copier la configuration Firebase
+- [x] Créer le fichier `.env.production` :
 ```env
 VITE_FIREBASE_API_KEY=ton_api_key
 VITE_FIREBASE_AUTH_DOMAIN=ton_project.firebaseapp.com
@@ -111,31 +111,122 @@ VITE_SENDGRID_API_KEY=ton_sendgrid_api_key
 ### 3. 💳 CONFIGURATION STRIPE
 
 #### Compte Stripe
-- [ ] Créer un compte sur https://stripe.com/
-- [ ] Activer le compte (fournir les informations légales)
-- [ ] Récupérer les clés dans Dashboard > Developers > API Keys
+- [x] Créer un compte sur https://stripe.com/
+- [x] Activer le compte (fournir les informations légales)
+- [x] Récupérer les clés dans Dashboard > Developers > API Keys
+- [x] Passer en mode "Live" une fois les tests terminés
 
 #### Configuration des clés
-- [ ] Ajouter à `.env.production` :
+- [x] Ajouter à `.env.production` :
 ```env
-VITE_STRIPE_PUBLIC_KEY=pk_live_...
-STRIPE_SECRET_KEY=sk_live_...
+VITE_STRIPE_PUBLIC_KEY=pk_live_51S5TaLD7YxdUINg8sauPBM5yPrvbARoORGnIjBOIHcMxIIrh7NXkAhjD0MiEHdkmZT8XWR2B2C8fdLV0bb4FtQj500FHEgjFDi
+STRIPE_SECRET_KEY=sk_live_... (à récupérer depuis le dashboard)
+VITE_STRIPE_WEBHOOK_SECRET=whsec_... (clé de signature webhook)
 ```
 
-#### Produits et Prix
-- [ ] Créer les produits dans Stripe Dashboard
-- [ ] "Programme G-Maxing Premium" - 297€
-- [ ] "Coaching Personnel" - 497€
-- [ ] "Guide Transformation" - 47€
-- [ ] Noter les Price IDs
+#### Produits et Prix dans Stripe Dashboard
+- [ ] Créer les produits suivants :
 
-#### Webhooks
-- [ ] Configurer un endpoint webhook : `https://tonsite.com/api/stripe/webhook`
-- [ ] Sélectionner les événements :
-  - [ ] payment_intent.succeeded
-  - [ ] invoice.payment_succeeded
-  - [ ] customer.subscription.created
-- [ ] Récupérer la clé de signature webhook
+**1. Looxmax - 29€**
+- [x] Aller dans Products > Add product
+- [x] Nom : "Looxmax - Protocole Apparence Faciale"
+- [x] Description : "Protocole personnalisé avec vitamines, diète, entraînement facial et produits pour améliorer l'apparence faciale"
+- [x] Prix : 29.00 EUR (one-time payment)
+- [x] Statement descriptor : "LOOXMAX"
+- [ ] Noter le Price ID : `price_1S5VfED7YxdUINg8ISFDqZQA`
+
+**2. Natty Plus - 29€**
+- [x] Créer le produit "Natty Plus - Protocole Débutant"
+- [x] Description : "Protocole 8 semaines avec SARMs légers, plan diète + entraînement pour débutants motivés"
+- [x] Prix : 29.00 EUR (one-time payment)
+- [x] Statement descriptor : "NATTY PLUS"
+- [x] Noter le Price ID : `price_1S5Vj2D7YxdUINg8YdY18UDD`
+
+**3. Looxmaxing Avancé - 59€**
+- [x] Créer le produit "Looxmaxing Avancé - Peptides"
+- [x] Description : "Protocole avancé 6-12 semaines avec peptides (GHK-Cu, TB-500) pour esthétique faciale et corporelle"
+- [x] Prix : 59.00 EUR (one-time payment)
+- [x] Statement descriptor : "LOOXMAX ADV"
+- [x] Noter le Price ID : `price_1S5VlVD7YxdUINg8QXLshodp`
+
+**4. Productivité - 29€**
+- [x] Créer le produit "Protocole Productivité"
+- [x] Description : "Nootropiques naturels, suppléments mémoire/énergie, techniques biohacking cognitif"
+- [x] Prix : 29.00 EUR (one-time payment)
+- [x] Statement descriptor : "PRODUCTIVITE"
+- [x] Noter le Price ID : `price_1S5VncD7YxdUINg8uAO6a1M8`
+
+**5. Accompagnement Personnalisé - 99€**
+- [x] Créer le produit "Accompagnement 100% Personnalisé"
+- [x] Description : "Protocole sur mesure, 2 appels vidéo 20min, suivi mail/DM pendant 6-12 semaines"
+- [x] Prix : 99.00 EUR (one-time payment)
+- [x] Statement descriptor : "ACCOMPAGNEMENT"
+- [x] Noter le Price ID : `price_1S5VowD7YxdUINg808jNSKJ5`
+
+#### Promotion Automatique
+- [ ] Configurer une réduction de 25% automatique quand 2 protocoles ou + sont achetés
+- [ ] Implémenter la logique côté frontend/backend (pas un produit Stripe séparé)
+
+#### Configuration Avancée des Produits
+- [ ] Ajouter des images pour chaque produit
+- [ ] Configurer les métadonnées (product_type, category, etc.)
+- [ ] Activer la facturation automatique si nécessaire
+- [ ] Configurer les descriptions de relevé bancaire
+
+#### Webhooks Configuration
+- [ ] Aller dans Developers > Webhooks
+- [ ] Cliquer "Add endpoint"
+- [ ] URL : `https://tonsite.com/api/stripe/webhook`
+- [ ] Sélectionner les événements suivants :
+  - [ ] `checkout.session.completed` (paiement terminé)
+  - [ ] `payment_intent.succeeded` (paiement réussi)
+  - [ ] `payment_intent.payment_failed` (paiement échoué)
+  - [ ] `invoice.payment_succeeded` (pour les abonnements)
+  - [ ] `customer.subscription.created` (nouvel abonnement)
+  - [ ] `customer.subscription.updated` (modification abonnement)
+  - [ ] `customer.subscription.deleted` (annulation abonnement)
+- [ ] Récupérer la clé de signature webhook (whsec_...)
+- [ ] Tester le webhook avec l'outil Stripe CLI
+
+#### Checkout Sessions (Pages de Paiement)
+- [ ] Configurer les success_url et cancel_url :
+  - Success : `https://tonsite.com/payment/success?session_id={CHECKOUT_SESSION_ID}`
+  - Cancel : `https://tonsite.com/payment/cancel`
+- [ ] Activer la collecte d'adresse de facturation
+- [ ] Configurer les modes de paiement acceptés (card, google_pay, apple_pay)
+- [ ] Personnaliser l'apparence avec votre branding
+
+#### Configuration Fiscale
+- [ ] Configurer la TVA si applicable dans Settings > Tax
+- [ ] Ajouter votre numéro de TVA français
+- [ ] Configurer les taux de TVA par pays
+- [ ] Activer la facturation automatique
+
+#### Tests et Sécurité
+- [ ] Utiliser les clés de test pour les développements
+- [ ] Tester tous les scénarios de paiement :
+  - [ ] Paiement réussi avec carte test : 4242 4242 4242 4242
+  - [ ] Paiement échoué avec carte test : 4000 0000 0000 0002
+  - [ ] 3D Secure avec carte test : 4000 0025 0000 3155
+- [ ] Vérifier la gestion des erreurs
+- [ ] Tester les webhooks en local avec Stripe CLI
+- [ ] Valider les montants et devises
+- [ ] Tester sur mobile (Apple Pay, Google Pay)
+
+#### Surveillance et Reporting
+- [ ] Configurer les alertes email pour :
+  - [ ] Paiements échoués
+  - [ ] Chargebacks/contestations
+  - [ ] Revenus quotidiens/hebdomadaires
+- [ ] Activer Radar pour la prévention de fraude
+- [ ] Configurer les rapports automatiques
+- [ ] Monitorer les métriques dans le dashboard
+
+#### Conformité et Légal
+- [ ] Ajouter les mentions légales de remboursement
+- [ ] Configurer la politique de remboursement dans Stripe
+- [ ] Vérifier la conformité PCI DSS (automatique avec Stripe)
+- [ ] Ajouter les CGV sur les pages de paiement
 
 ---
 

@@ -26,11 +26,18 @@ import {
   FireIcon,
   TrophyIcon,
   HeartIcon,
-  UserIcon
+  UserIcon,
+  BeakerIcon,
+  ChatBubbleLeftRightIcon,
+  VideoCameraIcon
 } from '@heroicons/react/24/outline';
 import { useAnalytics } from '../hooks/useAnalytics';
 import { blogEngine } from '../utils/blog/blogEngine';
 import { newsletterEngine } from '../utils/newsletter/newsletterEngine';
+import ProtocolManager from '../components/admin/ProtocolManager';
+import CommentModeration from '../components/admin/CommentModeration';
+import VideoManager from '../components/admin/VideoManager';
+import BlogManager from '../components/admin/BlogManager';
 
 interface AdminStats {
   users: {
@@ -69,7 +76,7 @@ const AdminDashboard: React.FC = () => {
   const { t } = useTranslation();
   const { trackPageView, trackButtonClick } = useAnalytics();
 
-  const [activeTab, setActiveTab] = useState<'overview' | 'users' | 'newsletter' | 'blog' | 'shop' | 'coaching' | 'settings'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'users' | 'newsletter' | 'blog' | 'protocols' | 'shop' | 'coaching' | 'settings'>('overview');
   const [stats, setStats] = useState<AdminStats>({
     users: { total: 15247, active: 8934, newToday: 127, premium: 2456 },
     newsletter: { subscribers: 10247, openRate: 32.4, emailsSent: 45678, newSubscribers: 89 },
@@ -127,6 +134,9 @@ const AdminDashboard: React.FC = () => {
     { id: 'users', label: 'Utilisateurs', icon: UserGroupIcon },
     { id: 'newsletter', label: 'Newsletter', icon: EnvelopeIcon },
     { id: 'blog', label: 'Blog', icon: DocumentTextIcon },
+    { id: 'protocols', label: 'Protocoles', icon: BeakerIcon },
+    { id: 'videos', label: 'Vidéos', icon: VideoCameraIcon },
+    { id: 'comments', label: 'Commentaires', icon: ChatBubbleLeftRightIcon },
     { id: 'shop', label: 'Boutique', icon: ShoppingCartIcon },
     { id: 'coaching', label: 'Coaching', icon: UserIcon },
     { id: 'settings', label: 'Paramètres', icon: CogIcon }
@@ -461,13 +471,13 @@ const AdminDashboard: React.FC = () => {
           </div>
         );
       case 'blog':
-        return (
-          <div className="text-center py-12">
-            <DocumentTextIcon className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-white mb-2">Gestion Blog</h3>
-            <p className="text-gray-400">Créez et gérez vos articles de blog G-Maxing.</p>
-          </div>
-        );
+        return <BlogManager />;
+      case 'protocols':
+        return <ProtocolManager />;
+      case 'videos':
+        return <VideoManager />;
+      case 'comments':
+        return <CommentModeration />;
       case 'shop':
         return (
           <div className="text-center py-12">

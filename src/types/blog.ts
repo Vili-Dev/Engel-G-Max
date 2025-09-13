@@ -127,8 +127,14 @@ export interface BlogVideo {
   title: string;
   description?: string;
   duration?: number;
-  platform?: 'youtube' | 'vimeo' | 'self_hosted';
+  platform: 'youtube' | 'vimeo' | 'self_hosted';
+  videoId: string; // ID extrait de l'URL pour YouTube/Vimeo
   embedCode?: string;
+  order?: number; // Ordre d'affichage dans l'article
+  isRequired?: boolean; // Si la vidéo est importante pour comprendre l'article
+  views?: number;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export interface ScientificReference {
