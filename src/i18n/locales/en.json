@@ -43,7 +43,8 @@
     "featured": "Featured",
     "popular": "Popular",
     "new": "New",
-    "recommended": "Recommended"
+    "recommended": "Recommended",
+    "language": "Language"
   },
   "navigation": {
     "home": "Home",
@@ -74,13 +75,17 @@
       "athletes_trained": "Athletes Trained",
       "success_rate": "Success Rate",
       "years_experience": "Years Experience",
-      "protocols_created": "Protocols Created"
+      "protocols_created": "Protocols Created",
+      "clients_coached": "Clients Coached",
+      "passion": "Passion & Commitment",
+      "records": "Records Broken",
+      "method": "Exclusive Method"
     }
   },
   "about": {
     "title": "Meet Engel Garcia Gomez",
     "subtitle": "World-Class Sports Performance Coach",
-    "description": "With over a decade of experience in elite sports coaching, Engel Garcia Gomez has developed the revolutionary G-Maxing methodology that has transformed thousands of athletes worldwide.",
+    "description": "Passionate sports coach starting his journey, Engel Garcia Gomez has created the G-Maxing methodology to help you maximize your potential and build confidence through personalized coaching.",
     "expertise": {
       "title": "Areas of Expertise",
       "strength": "Strength & Conditioning",
@@ -88,14 +93,45 @@
       "recovery": "Recovery & Rehabilitation",
       "nutrition": "Sports Nutrition",
       "psychology": "Sports Psychology",
-      "biomechanics": "Biomechanical Analysis"
+      "biomechanics": "Biomechanical Analysis",
+      "descriptions": {
+        "strength": "Maximum strength optimization and explosive power development with advanced scientific protocols.",
+        "performance": "Complete biomechanical analysis and athletic performance optimization for exceptional results.",
+        "recovery": "Advanced recovery techniques and injury prevention for consistent and safe progression.",
+        "nutrition": "Personalized nutritional strategies optimizing physiological adaptations and body composition.",
+        "psychology": "Mental training and psychological optimization for peak performance mindset.",
+        "biomechanics": "In-depth biomechanical analysis to optimize movement patterns and maximize efficiency.",
+        "psychology": "Mental coaching and motivation optimization to overcome psychological barriers."
+      }
     },
     "achievements": {
       "title": "Achievements",
       "certifications": "International Certifications",
       "publications": "Research Publications",
       "athletes": "Elite Athletes Coached",
-      "records": "Records Broken"
+      "records": "Records Broken",
+      "items": {
+        "engagement": {
+          "number": "100%",
+          "label": "Personal Commitment",
+          "description": "Total dedication to continuous improvement and self-taught learning"
+        },
+        "method": {
+          "number": "G-Max",
+          "label": "Method Created",
+          "description": "G-Maxing method developed to optimize everyone's potential"
+        },
+        "clients": {
+          "number": "5",
+          "label": "Clients Coached",
+          "description": "Clients passionately guided towards their personal goals"
+        },
+        "records": {
+          "number": "3",
+          "label": "Records Broken",
+          "description": "Personal records achieved by his clients with the G-Maxing method"
+        }
+      }
     }
   },
   "services": {
@@ -144,6 +180,80 @@
         "Injury prevention",
         "Long-term planning"
       ]
+    },
+    "service_features": {
+      "personal": [
+        "Complete biomechanical assessment and postural analysis",
+        "100% personalized G-Maxing protocols according to your goals",
+        "Individual sessions with Engel Garcia Gomez",
+        "Complete nutritional monitoring and hormonal optimization",
+        "Blood analyses and real-time adjustments",
+        "Mental support and psychological coaching",
+        "Priority access to new G-Maxing methods",
+        "Results guarantee or full refund"
+      ],
+      "group": [
+        "Groups of maximum 6 people for optimal monitoring",
+        "G-Maxing protocols adapted to group level",
+        "Dynamic sessions and collective motivation",
+        "Direct coaching by Engel Garcia Gomez",
+        "Personalized nutrition plans for each member",
+        "Monthly challenges and rewards",
+        "Access to private G-Maxing Elite community"
+      ],
+      "online": [
+        "Exclusive platform with integrated AI",
+        "Real-time personalized G-Maxing protocols",
+        "Exercise videos with technical corrections",
+        "Weekly video sessions with Engel",
+        "Mobile application with complete tracking",
+        "Global community of G-Maxing practitioners",
+        "Library of 500+ training protocols"
+      ],
+      "protocol": [
+        "Complete analysis of your specific needs",
+        "Custom development by Engel Garcia Gomez",
+        "G-Maxing methodology adapted to your sport",
+        "Scientific tests and validations",
+        "Complete training in protocol usage",
+        "Permanent updates and evolutions",
+        "Official G-Maxing certification"
+      ]
+    },
+    "common_texts": {
+      "popular_badge": "⭐ Most Popular",
+      "see_less": "See less",
+      "more_benefits": "other benefits",
+      "choose_service": "Choose this Service",
+      "more_details": "More Details",
+      "on_quote": "On quote",
+      "per_month": "/month",
+      "from": "From ",
+      "free_consultation": "🎯 Free Consultation",
+      "see_method": "See G-Maxing Method",
+      "our_services_title": "🏆 Our G-Maxing Coaching Services",
+      "choose_level": "Choose the level of support that matches your goals and benefit from Engel Garcia Gomez's expertise.",
+      "countries_covered": "Countries Covered",
+      "coaching_services_title": "🧬 Coaching Services",
+      "g_maxing_subtitle": "G-Maxing by Engel Garcia Gomez"
+    },
+    "process_steps": {
+      "evaluation": {
+        "title": "Complete Evaluation",
+        "description": "Biomechanical analysis, performance tests and evaluation of your unique genetic potential."
+      },
+      "protocol": {
+        "title": "Personalized Protocol",
+        "description": "Creation of a 100% adapted G-Maxing protocol to your profile, goals and constraints."
+      },
+      "coaching": {
+        "title": "Direct Coaching",
+        "description": "Direct coaching and support in executing your optimized protocol."
+      },
+      "optimization": {
+        "title": "Continuous Optimization",
+        "description": "Permanent adjustments based on your progress and performance evolution."
+      }
     }
   },
   "protocols": {
@@ -306,6 +416,17 @@
     "view_protocols": "View Protocols",
     "schedule_session": "Schedule Session",
     "track_progress": "Track Progress"
+  },
+  "stats_labels": {
+    "clients_transformed": "Clients Transformed",
+    "success_rate": "Success Rate",
+    "years_experience": "Years Experience",
+    "protocols_created": "Protocols Created",
+    "fixed_stats": {
+      "clients": "5",
+      "success_rate": "98%",
+      "countries": "3+"
+    }
   },
   "footer": {
     "company": {

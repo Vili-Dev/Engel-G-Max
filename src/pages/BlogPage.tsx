@@ -21,7 +21,11 @@ import {
   UserIcon,
   ChartBarIcon,
   LightBulbIcon,
-  AcademicCapIcon
+  AcademicCapIcon,
+  XMarkIcon,
+  HeartIcon,
+  ShareIcon,
+  EyeIcon
 } from '@heroicons/react/24/outline';
 
 import BlogCard from '../components/blog/BlogCard';
@@ -40,6 +44,7 @@ const BlogPage: React.FC = () => {
   const [sortBy, setSortBy] = useState<'publishedAt' | 'viewCount' | 'likeCount'>('publishedAt');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
   const postsPerPage = 12;
 
   // Données du blog
@@ -130,9 +135,11 @@ const BlogPage: React.FC = () => {
     if (post) {
       trackContentView(post.id, 'blog_post');
       blogEngine.incrementViewCount(post.id);
-      
-      // En production, naviguer vers l'article
-      window.location.href = `/blog/${slug}`;
+
+      // Afficher l'article dans un modal
+      setSelectedPost(post);
+      // Recharger les données pour mettre à jour les compteurs de vues
+      loadBlogData();
     }
   };
 
@@ -538,6 +545,130 @@ const BlogPage: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* Modal d'article complet */}
+      <AnimatePresence>
+        {selectedPost && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4"
+            onClick={() => setSelectedPost(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              className="bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Header */}
+              <div className="sticky top-0 bg-gray-900/95 backdrop-blur-sm border-b border-white/10 p-6 flex items-center justify-between">
+                <div className="flex items-center space-x-4">
+                  <div className="flex items-center space-x-2">
+                    <img
+                      src={selectedPost.author.avatar}
+                      alt={selectedPost.author.name}
+                      className="w-10 h-10 rounded-full"
+                      onError={(e) => {
+                        e.currentTarget.src = '/images/default-avatar.jpg';
+                      }}
+                    />
+                    <div>
+                      <p className="text-white font-medium">{selectedPost.author.name}</p>
+                      <p className="text-gray-400 text-sm">
+                        {selectedPost.publishedAt.toLocaleDateString('fr-FR')}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-center space-x-4 text-sm text-gray-400">
+                    <div className="flex items-center space-x-1">
+                      <EyeIcon className="h-4 w-4" />
+                      <span>{selectedPost.viewCount}</span>
+                    </div>
+                    <div className="flex items-center space-x-1">
+                      <HeartIcon className="h-4 w-4" />
+                      <span>{selectedPost.likeCount}</span>
+                    </div>
+                    <div className="flex items-center space-x-1">
+                      <ClockIcon className="h-4 w-4" />
+                      <span>{selectedPost.readingTime} min</span>
+                    </div>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setSelectedPost(null)}
+                  className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+                >
+                  <XMarkIcon className="h-6 w-6 text-white" />
+                </button>
+              </div>
+
+              {/* Contenu */}
+              <div className="p-6">
+                <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                  {selectedPost.title}
+                </h1>
+
+                <p className="text-xl text-gray-300 mb-6 italic">
+                  {selectedPost.excerpt}
+                </p>
+
+                {/* Tags */}
+                {selectedPost.tags.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mb-8">
+                    {selectedPost.tags.map((tag, index) => (
+                      <span
+                        key={index}
+                        className="bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full text-sm"
+                      >
+                        #{tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+
+                {/* Contenu principal */}
+                <div className="prose prose-invert prose-lg max-w-none">
+                  {selectedPost.content.split('\n').map((paragraph, index) => (
+                    paragraph.trim() ? (
+                      <p key={index} className="text-gray-300 mb-6 leading-relaxed">
+                        {paragraph}
+                      </p>
+                    ) : (
+                      <br key={index} />
+                    )
+                  ))}
+                </div>
+
+                {/* Actions */}
+                <div className="mt-8 pt-6 border-t border-white/10 flex items-center justify-between">
+                  <div className="flex items-center space-x-4">
+                    <button
+                      onClick={() => handleLike(selectedPost.id)}
+                      className="flex items-center space-x-2 bg-red-500/20 hover:bg-red-500/30 text-red-300 px-4 py-2 rounded-lg transition-colors"
+                    >
+                      <HeartIcon className="h-5 w-5" />
+                      <span>J'aime ({selectedPost.likeCount})</span>
+                    </button>
+                    <button
+                      onClick={() => handleShare(selectedPost)}
+                      className="flex items-center space-x-2 bg-blue-500/20 hover:bg-blue-500/30 text-blue-300 px-4 py-2 rounded-lg transition-colors"
+                    >
+                      <ShareIcon className="h-5 w-5" />
+                      <span>Partager</span>
+                    </button>
+                  </div>
+                  <div className="text-gray-400 text-sm">
+                    {selectedPost.viewCount} vues
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

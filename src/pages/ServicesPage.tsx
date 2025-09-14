@@ -63,7 +63,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
       {popular && (
         <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
           <div className="bg-gradient-to-r from-primary-500 to-primary-600 text-white px-4 py-1 rounded-full text-sm font-bold">
-            ⭐ Plus Populaire
+            {t('common_texts.popular_badge')}
           </div>
         </div>
       )}
@@ -103,7 +103,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
             onClick={() => setIsExpanded(!isExpanded)}
             className="text-primary-400 text-sm hover:text-primary-300 mb-6 transition-colors"
           >
-            {isExpanded ? 'Voir moins' : `+${features.length - 3} autres avantages`}
+            {isExpanded ? t('common_texts.see_less') : `+${features.length - 3} ${t('common_texts.more_benefits')}`}
           </button>
         )}
 
@@ -112,7 +112,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
             variant="primary"
             className="w-full glass-btn-primary"
           >
-            Choisir ce Service
+            {t('common_texts.choose_service')}
             <ArrowRightIcon className="ml-2 h-4 w-4" />
           </Button>
           
@@ -121,7 +121,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
             className="w-full text-primary-400 hover:text-primary-300"
             onClick={() => setIsExpanded(true)}
           >
-            Plus de Détails
+            {t('common_texts.more_details')}
           </Button>
         </div>
       </GlassCard>
@@ -223,65 +223,32 @@ const ServicesPage: React.FC = () => {
       icon: <UserIcon className="h-12 w-12" />,
       title: t('services.personal_coaching.title'),
       description: t('services.personal_coaching.description'),
-      features: [
-        "Évaluation biomécanique complète et analyse posturale",
-        "Protocoles G-Maxing 100% personnalisés selon vos objectifs",
-        "Séances individuelles avec Engel Garcia Gomez",
-        "Suivi nutritionnel complet et optimisation hormonale",
-        "Analyses sanguines et ajustements en temps réel",
-        "Support mental et coaching psychologique",
-        "Accès prioritaire aux nouvelles méthodes G-Maxing",
-        "Garantie résultats ou remboursement intégral"
-      ],
-      price: "Sur devis",
+      features: t('service_features.personal'),
+      price: t('common_texts.on_quote'),
       popular: false
     },
     {
       icon: <UserGroupIcon className="h-12 w-12" />,
       title: t('services.group_training.title'),
       description: t('services.group_training.description'),
-      features: [
-        "Groupes de maximum 6 personnes pour un suivi optimal",
-        "Protocoles G-Maxing adaptés au niveau du groupe",
-        "Sessions dynamiques et motivation collective",
-        "Coaching direct par Engel Garcia Gomez",
-        "Plans nutritionnels personnalisés pour chaque membre",
-        "Challenges mensuels et récompenses",
-        "Accès à la communauté privée G-Maxing Elite"
-      ],
-      price: formatCurrency(197) + "/mois",
+      features: t('service_features.group'),
+      price: formatCurrency(197) + t('common_texts.per_month'),
       popular: true
     },
     {
       icon: <ComputerDesktopIcon className="h-12 w-12" />,
       title: t('services.online_coaching.title'),
       description: t('services.online_coaching.description'),
-      features: [
-        "Plateforme exclusive avec IA intégrée",
-        "Protocoles G-Maxing personnalisés en temps réel",
-        "Vidéos d'exercices avec corrections techniques",
-        "Sessions vidéo hebdomadaires avec Engel",
-        "Application mobile avec suivi complet",
-        "Communauté mondiale de pratiquants G-Maxing",
-        "Bibliothèque de +500 protocoles d'entraînement"
-      ],
-      price: formatCurrency(97) + "/mois",
+      features: t('service_features.online'),
+      price: formatCurrency(97) + t('common_texts.per_month'),
       popular: false
     },
     {
       icon: <DocumentTextIcon className="h-12 w-12" />,
       title: t('services.protocol_development.title'),
       description: t('services.protocol_development.description'),
-      features: [
-        "Analyse complète de vos besoins spécifiques",
-        "Développement sur mesure par Engel Garcia Gomez",
-        "Méthodologie G-Maxing adaptée à votre sport",
-        "Tests et validations scientifiques",
-        "Formation complète à l'utilisation du protocole",
-        "Mises à jour et évolutions permanentes",
-        "Certification officielle G-Maxing"
-      ],
-      price: "À partir de " + formatCurrency(997),
+      features: t('service_features.protocol'),
+      price: t('common_texts.from') + formatCurrency(997),
       popular: false
     }
   ];
@@ -290,26 +257,26 @@ const ServicesPage: React.FC = () => {
   const processSteps = [
     {
       number: "1",
-      title: "Évaluation Complète",
-      description: "Analyse biomécanique, tests de performance et évaluation de votre potentiel génétique unique.",
+      title: t('process_steps.evaluation.title'),
+      description: t('process_steps.evaluation.description'),
       icon: <ChartBarIcon className="h-8 w-8" />
     },
     {
       number: "2", 
-      title: "Protocole Personnalisé",
-      description: "Création d'un protocole G-Maxing 100% adapté à votre profil, objectifs et contraintes.",
+      title: t('process_steps.protocol.title'),
+      description: t('process_steps.protocol.description'),
       icon: <DocumentTextIcon className="h-8 w-8" />
     },
     {
       number: "3",
-      title: "Mise en Application",
-      description: "Coaching direct et accompagnement dans l'exécution de votre protocole optimisé.",
+      title: t('process_steps.implementation.title'),
+      description: t('process_steps.implementation.description'),
       icon: <TrophyIcon className="h-8 w-8" />
     },
     {
       number: "4",
-      title: "Suivi & Optimisation",
-      description: "Ajustements permanents basés sur vos progrès et l'évolution de vos performances.",
+      title: t('process_steps.optimization.title'),
+      description: t('process_steps.optimization.description'),
       icon: <BoltIcon className="h-8 w-8" />
     }
   ];
@@ -348,9 +315,9 @@ const ServicesPage: React.FC = () => {
               animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              🧬 Services de Coaching
+              {t('common_texts.coaching_services_title')}
               <span className="block bg-gradient-to-r from-primary-400 to-primary-600 bg-clip-text text-transparent">
-                G-Maxing d'Engel Garcia Gomez
+                {t('common_texts.g_maxing_subtitle')}
               </span>
             </motion.h1>
 
@@ -372,9 +339,9 @@ const ServicesPage: React.FC = () => {
             className="grid grid-cols-3 gap-8 max-w-2xl mx-auto mb-12"
           >
             {[
-              { number: "15,000+", label: "Clients Transformés" },
-              { number: "98%", label: "Taux de Réussite" },
-              { number: "25+", label: "Pays Couverts" }
+              { number: t('stats_labels.fixed_stats.clients'), label: t('stats_labels.clients_transformed') },
+              { number: t('stats_labels.fixed_stats.success_rate'), label: t('stats_labels.success_rate') },
+              { number: t('stats_labels.fixed_stats.countries'), label: t('common_texts.countries_covered') }
             ].map((stat, index) => (
               <div key={index} className="text-center">
                 <div className="text-3xl font-bold text-primary-400 mb-2">
@@ -397,7 +364,7 @@ const ServicesPage: React.FC = () => {
               variant="primary"
               className="glass-btn-primary text-lg px-8 py-4"
             >
-              🎯 Consultation Gratuite
+              {t('common_texts.free_consultation')}
               <ArrowRightIcon className="ml-2 h-5 w-5" />
             </Button>
             
@@ -408,7 +375,7 @@ const ServicesPage: React.FC = () => {
               onClick={() => setShowVideoModal(true)}
             >
               <PlayIcon className="mr-2 h-5 w-5 group-hover:animate-pulse" />
-              Voir la Méthode G-Maxing
+              {t('common_texts.see_method')}
             </Button>
           </motion.div>
         </div>
@@ -424,11 +391,10 @@ const ServicesPage: React.FC = () => {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-              🏆 Nos Services de Coaching G-Maxing
+              {t('common_texts.our_services_title')}
             </h2>
             <p className="text-gray-300 text-lg max-w-3xl mx-auto">
-              Choisissez le niveau d'accompagnement qui correspond à vos objectifs et 
-              bénéficiez de l'expertise d'Engel Garcia Gomez.
+              {t('common_texts.choose_level')}
             </p>
           </motion.div>
 
@@ -495,23 +461,23 @@ const ServicesPage: React.FC = () => {
                 {[
                   {
                     icon: <FireIcon className="h-6 w-6" />,
-                    title: "Optimisation Génétique",
-                    description: "Analyse de vos polymorphismes pour adapter l'entraînement à votre ADN"
+                    title: t('methodology.genetic_optimization.title'),
+                    description: t('methodology.genetic_optimization.description')
                   },
                   {
                     icon: <BoltIcon className="h-6 w-6" />,
-                    title: "Biomécanique Avancée", 
-                    description: "Correction des patterns de mouvement pour maximiser l'efficience"
+                    title: t('methodology.advanced_biomechanics.title'),
+                    description: t('methodology.advanced_biomechanics.description')
                   },
                   {
                     icon: <HeartIcon className="h-6 w-6" />,
-                    title: "Adaptation Hormonale",
-                    description: "Protocoles optimisés pour votre profil hormonal spécifique"
+                    title: t('methodology.hormonal_adaptation.title'),
+                    description: t('methodology.hormonal_adaptation.description')
                   },
                   {
                     icon: <LightBulbIcon className="h-6 w-6" />,
-                    title: "Intelligence Artificielle",
-                    description: "IA propriétaire pour l'ajustement en temps réel des protocoles"
+                    title: t('methodology.artificial_intelligence.title'),
+                    description: t('methodology.artificial_intelligence.description')
                   }
                 ].map((item, index) => (
                   <motion.div

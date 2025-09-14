@@ -163,23 +163,23 @@ const HomePage: React.FC = () => {
   // Statistics data
   const stats = [
     {
-      number: formatNumber(15000),
-      label: t('hero.stats.athletes_trained'),
+      number: "5",
+      label: t('hero.stats.clients_coached'),
       icon: <TrophyIcon className="h-8 w-8" />
     },
     {
-      number: "98%",
-      label: t('hero.stats.success_rate'),
+      number: "100%",
+      label: t('hero.stats.passion'),
       icon: <FireIcon className="h-8 w-8" />
     },
     {
-      number: "12+",
-      label: t('hero.stats.years_experience'),
+      number: "3",
+      label: t('hero.stats.records'),
       icon: <BoltIcon className="h-8 w-8" />
     },
     {
-      number: formatNumber(500),
-      label: t('hero.stats.protocols_created'),
+      number: "G-Max",
+      label: t('hero.stats.method'),
       icon: <HeartIcon className="h-8 w-8" />
     }
   ];
@@ -344,7 +344,7 @@ const HomePage: React.FC = () => {
                 🎯 {t('hero.cta.book_consultation')}
               </p>
               <p className="text-white text-sm">
-                Découvrez votre potentiel avec une consultation personnalisée
+                {t('consultation.discover_potential')}
               </p>
             </GlassCard>
           </motion.div>
@@ -371,10 +371,10 @@ const HomePage: React.FC = () => {
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              🏆 Résultats Prouvés d'Engel Garcia Gomez
+              {t('results.title')}
             </h2>
             <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-              Des milliers d'athlètes transformés avec la méthodologie G-Maxing révolutionnaire
+              {t('results.subtitle')}
             </p>
           </motion.div>
 
@@ -401,20 +401,14 @@ const HomePage: React.FC = () => {
               viewport={{ once: true }}
             >
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-                🧬 La Méthode G-Maxing d'Engel Garcia Gomez
+                {t('consultation.method_title')}
               </h2>
               <p className="text-gray-300 text-lg mb-8">
-                Une approche scientifique révolutionnaire qui optimise votre potentiel génétique 
-                pour des transformations physiques exceptionnelles.
+                {t('consultation.method_description')}
               </p>
 
               <div className="space-y-4">
-                {[
-                  'Analyse biomécanique complète',
-                  'Protocoles personnalisés scientifiques', 
-                  'Optimisation hormonale naturelle',
-                  'Suivi en temps réel des progrès'
-                ].map((feature, index) => (
+                {t('consultation.features').map((feature, index) => (
                   <motion.div
                     key={index}
                     initial={{ opacity: 0, x: -20 }}
@@ -431,7 +425,7 @@ const HomePage: React.FC = () => {
 
               <div className="mt-8">
                 <Button variant="primary" size="lg" className="glass-btn-primary">
-                  Découvrir la Méthode G-Maxing
+                  {t('consultation.discover_method')}
                   <ArrowRightIcon className="ml-2 h-5 w-5" />
                 </Button>
               </div>
@@ -449,10 +443,10 @@ const HomePage: React.FC = () => {
                   <PlayIcon className="h-16 w-16 text-primary-400" />
                 </div>
                 <h3 className="text-xl font-bold text-white mb-4">
-                  Transformation en Action
+                  {t('transformation.title')}
                 </h3>
                 <p className="text-gray-300">
-                  Regardez comment la méthode G-Maxing transforme des athlètes du monde entier
+                  {t('transformation.description')}
                 </p>
               </GlassCard>
             </motion.div>
@@ -470,10 +464,10 @@ const HomePage: React.FC = () => {
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              💬 Témoignages Clients d'Engel Garcia Gomez
+              {t('testimonials.title')}
             </h2>
             <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-              Découvrez les transformations extraordinaires réalisées avec la méthode G-Maxing
+              {t('testimonials.description')}
             </p>
           </motion.div>
 
@@ -495,7 +489,7 @@ const HomePage: React.FC = () => {
             className="text-center mt-12"
           >
             <Button variant="secondary" size="lg" className="glass-btn-secondary">
-              Voir Plus de Témoignages
+              {t('testimonials.see_more')}
               <ArrowRightIcon className="ml-2 h-5 w-5" />
             </Button>
           </motion.div>
@@ -514,11 +508,10 @@ const HomePage: React.FC = () => {
           >
             <GlassCard className="max-w-4xl mx-auto p-6 lg:p-12">
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4 lg:mb-6">
-                🚀 Prêt à Transformer Votre Physique avec Engel Garcia Gomez ?
+                {t('cta.title')}
               </h2>
               <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
-                Rejoignez des milliers d'athlètes qui ont révolutionné leur entraînement 
-                avec la méthode G-Maxing d'Engel Garcia Gomez.
+                {t('cta.description')}
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -527,7 +520,7 @@ const HomePage: React.FC = () => {
                   size="lg" 
                   className="glass-btn-primary text-lg px-8 py-4"
                 >
-                  🎯 Consultation Gratuite
+                  {t('cta.free_consultation')}
                   <ArrowRightIcon className="ml-2 h-5 w-5" />
                 </Button>
                 
@@ -543,7 +536,7 @@ const HomePage: React.FC = () => {
               <div className="mt-8 flex justify-center items-center space-x-6 text-sm text-gray-400">
                 <div className="flex items-center">
                   <CheckIcon className="h-4 w-4 text-primary-400 mr-2" />
-                  Consultation 100% gratuite
+                  {t('cta.consultation_description')}
                 </div>
                 <div className="flex items-center">
                   <CheckIcon className="h-4 w-4 text-primary-400 mr-2" />

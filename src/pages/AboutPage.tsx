@@ -114,12 +114,10 @@ const AboutPage: React.FC = () => {
   const heroRef = useRef(null);
   const expertiseRef = useRef(null);
   const achievementsRef = useRef(null);
-  const timelineRef = useRef(null);
 
   const heroInView = useInView(heroRef, { once: true });
   const expertiseInView = useInView(expertiseRef, { once: true });
   const achievementsInView = useInView(achievementsRef, { once: true });
-  const timelineInView = useInView(timelineRef, { once: true });
 
   // SEO-optimized data based on language
   const getSEOData = () => {
@@ -127,7 +125,7 @@ const AboutPage: React.FC = () => {
       case 'fr':
         return {
           title: "Qui est Engel Garcia Gomez ? Expert G-Maxing et Coach Sportif d'Élite",
-          description: "Découvrez l'histoire d'Engel Garcia Gomez, créateur de la méthode G-Maxing révolutionnaire. Coach sportif d'élite avec +15 ans d'expérience, il a transformé des milliers d'athlètes mondialement.",
+          description: "Découvrez l'histoire d'Engel Garcia Gomez, créateur de la méthode G-Maxing. Coach sportif passionné qui débute sa carrière avec une approche personnalisée pour maximiser votre potentiel et votre confiance.",
           keywords: "Engel Garcia Gomez biographie, expert G-Maxing, coach sportif élite, méthode transformation, entraîneur personnel, parcours professionnel"
         };
       case 'es':
@@ -139,7 +137,7 @@ const AboutPage: React.FC = () => {
       default:
         return {
           title: "Who is Engel Garcia Gomez? G-Maxing Expert and Elite Sports Coach",
-          description: "Discover the story of Engel Garcia Gomez, creator of the revolutionary G-Maxing method. Elite sports coach with +15 years of experience, he has transformed thousands of athletes worldwide.",
+          description: "Discover the story of Engel Garcia Gomez, creator of the G-Maxing method. Passionate sports coach starting his career with a personalized approach to maximize your potential and confidence.",
           keywords: "Engel Garcia Gomez biography, G-Maxing expert, elite sports coach, transformation method, personal trainer, professional journey"
         };
     }
@@ -152,32 +150,32 @@ const AboutPage: React.FC = () => {
     {
       icon: <FireIcon className="h-8 w-8" />,
       title: t('about.expertise.strength'),
-      description: "Optimisation de la force maximale et développement de la puissance explosive avec des protocoles scientifiques avancés."
+      description: t('about.expertise.descriptions.strength')
     },
     {
       icon: <ChartBarIcon className="h-8 w-8" />,
       title: t('about.expertise.performance'),
-      description: "Analyse biomécanique complète et optimisation des performances athlétiques pour des résultats exceptionnels."
+      description: t('about.expertise.descriptions.performance')
     },
     {
       icon: <HeartIcon className="h-8 w-8" />,
       title: t('about.expertise.recovery'),
-      description: "Techniques de récupération avancées et prévention des blessures pour une progression constante et sécurisée."
+      description: t('about.expertise.descriptions.recovery')
     },
     {
       icon: <LightBulbIcon className="h-8 w-8" />,
       title: t('about.expertise.nutrition'),
-      description: "Stratégies nutritionnelles personnalisées optimisant les adaptations physiologiques et la composition corporelle."
+      description: t('about.expertise.descriptions.nutrition')
     },
     {
       icon: <UserGroupIcon className="h-8 w-8" />,
       title: t('about.expertise.psychology'),
-      description: "Coaching mental et optimisation de la motivation pour surpasser les limites psychologiques."
+      description: t('about.expertise.descriptions.psychology')
     },
     {
       icon: <AcademicCapIcon className="h-8 w-8" />,
       title: t('about.expertise.biomechanics'),
-      description: "Analyse biomécanique approfondie pour optimiser les patterns de mouvement et maximiser l'efficience."
+      description: t('about.expertise.descriptions.biomechanics')
     }
   ];
 
@@ -185,63 +183,30 @@ const AboutPage: React.FC = () => {
   const achievements = [
     {
       icon: <CheckBadgeIcon className="h-12 w-12" />,
-      number: "25+",
-      label: t('about.achievements.certifications'),
-      description: "Certifications internationales en sciences du sport et coaching de performance"
+      number: t('about.achievements.items.engagement.number'),
+      label: t('about.achievements.items.engagement.label'),
+      description: t('about.achievements.items.engagement.description')
     },
     {
       icon: <AcademicCapIcon className="h-12 w-12" />,
-      number: "50+",
-      label: t('about.achievements.publications'),
-      description: "Publications scientifiques sur l'optimisation des performances athlétiques"
+      number: t('about.achievements.items.method.number'),
+      label: t('about.achievements.items.method.label'),
+      description: t('about.achievements.items.method.description')
     },
     {
       icon: <TrophyIcon className="h-12 w-12" />,
-      number: "500+",
-      label: t('about.achievements.athletes'),
-      description: "Athlètes d'élite coachés vers l'excellence dans diverses disciplines"
+      number: t('about.achievements.items.clients.number'),
+      label: t('about.achievements.items.clients.label'),
+      description: t('about.achievements.items.clients.description')
     },
     {
       icon: <StarIcon className="h-12 w-12" />,
-      number: "200+",
-      label: t('about.achievements.records'),
-      description: "Records personnels et compétitifs battus par ses clients"
+      number: t('about.achievements.items.records.number'),
+      label: t('about.achievements.items.records.label'),
+      description: t('about.achievements.items.records.description')
     }
   ];
 
-  // Professional timeline
-  const timeline = [
-    {
-      year: "2008",
-      title: "Début de Carrière",
-      description: "Formation en Sciences du Sport et premiers pas dans le coaching personnel avec une approche scientifique innovante."
-    },
-    {
-      year: "2012", 
-      title: "Développement de la Méthode G-Maxing",
-      description: "Création des premiers protocoles G-Maxing basés sur l'optimisation génétique et l'adaptation personnalisée."
-    },
-    {
-      year: "2015",
-      title: "Reconnaissance Internationale",
-      description: "Premiers clients athlètes professionnels et expansion de la méthode G-Maxing à l'échelle internationale."
-    },
-    {
-      year: "2018",
-      title: "Révolution Numérique",
-      description: "Lancement de la plateforme digitale et démocratisation de l'accès aux protocoles G-Maxing."
-    },
-    {
-      year: "2021",
-      title: "Expansion Mondiale",
-      description: "Ouverture de centres G-Maxing dans 15 pays et formation de coachs certifiés G-Maxing."
-    },
-    {
-      year: "2024",
-      title: "EngelGMax.com",
-      description: "Lancement de la plateforme complète EngelGMax avec IA intégrée et protocoles ultra-personnalisés."
-    }
-  ];
 
   return (
     <>
@@ -301,7 +266,7 @@ const AboutPage: React.FC = () => {
                   animate={{ y: [0, 10, 0] }}
                   transition={{ duration: 2, repeat: Infinity, delay: 1 }}
                 >
-                  ⚡ 15+ Ans d'Expérience
+                  ⚡ 5+ Ans d'Expérience
                 </motion.div>
               </div>
             </motion.div>
@@ -319,7 +284,7 @@ const AboutPage: React.FC = () => {
                 transition={{ duration: 0.8, delay: 0.4 }}
               >
                 <span className="bg-gradient-to-r from-primary-400 to-primary-600 bg-clip-text text-transparent">
-                  Engel Garcia Gomez
+                  Engel Garcia
                 </span>
               </motion.h1>
 
@@ -350,9 +315,7 @@ const AboutPage: React.FC = () => {
               >
                 {[
                   '🧬 Créateur de la Méthode G-Maxing révolutionnaire',
-                  '🏆 Coach de +500 athlètes d\'élite mondialement',
-                  '📚 Auteur de +50 publications scientifiques',
-                  '🌍 Reconnu internationalement dans 25+ pays'
+                  '🏆 Coach de +10 athlètes',
                 ].map((highlight, index) => (
                   <motion.div
                     key={index}
@@ -457,72 +420,6 @@ const AboutPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Professional Timeline */}
-      <section ref={timelineRef} className="py-20 bg-black/20">
-        <div className="container mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={timelineInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-              📈 Parcours Professionnel d'Engel Garcia Gomez
-            </h2>
-            <p className="text-gray-300 text-lg max-w-3xl mx-auto">
-              De jeune passionné de sciences du sport à expert mondial reconnu : 
-              découvrez l'évolution exceptionnelle d'Engel Garcia Gomez.
-            </p>
-          </motion.div>
-
-          <div className="relative max-w-4xl mx-auto">
-            {/* Timeline line */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-primary-500 to-primary-600" />
-
-            {timeline.map((event, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className={cn(
-                  "flex items-center mb-12",
-                  index % 2 === 0 ? "flex-row" : "flex-row-reverse"
-                )}
-              >
-                <div className={cn(
-                  "w-5/12",
-                  index % 2 === 0 ? "text-right pr-8" : "text-left pl-8"
-                )}>
-                  <GlassCard className="p-6">
-                    <div className="text-primary-400 font-bold text-2xl mb-2">
-                      {event.year}
-                    </div>
-                    <h3 className="text-white font-bold text-xl mb-3">
-                      {event.title}
-                    </h3>
-                    <p className="text-gray-300">
-                      {event.description}
-                    </p>
-                  </GlassCard>
-                </div>
-
-                {/* Timeline dot */}
-                <div className="w-2/12 flex justify-center">
-                  <motion.div
-                    className="w-6 h-6 bg-primary-500 rounded-full border-4 border-white shadow-lg"
-                    whileHover={{ scale: 1.2 }}
-                    transition={{ duration: 0.2 }}
-                  />
-                </div>
-
-                <div className="w-5/12" />
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* CTA Section */}
       <section className="py-20">
@@ -565,20 +462,20 @@ const AboutPage: React.FC = () => {
               {/* Trust indicators */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center text-sm text-gray-400">
                 <div>
-                  <div className="text-primary-400 font-bold text-lg">15+</div>
-                  <div>Ans d'Expérience</div>
+                  <div className="text-primary-400 font-bold text-lg">100%</div>
+                  <div>{t('stats_labels.passion_devotion')}</div>
                 </div>
                 <div>
-                  <div className="text-primary-400 font-bold text-lg">15,000+</div>
-                  <div>Clients Transformés</div>
+                  <div className="text-primary-400 font-bold text-lg">5</div>
+                  <div>{t('stats_labels.clients_coached')}</div>
                 </div>
                 <div>
-                  <div className="text-primary-400 font-bold text-lg">98%</div>
-                  <div>Taux de Réussite</div>
+                  <div className="text-primary-400 font-bold text-lg">3</div>
+                  <div>{t('stats_labels.records_broken')}</div>
                 </div>
                 <div>
-                  <div className="text-primary-400 font-bold text-lg">25+</div>
-                  <div>Pays d'Influence</div>
+                  <div className="text-primary-400 font-bold text-lg">24/7</div>
+                  <div>Support Disponible</div>
                 </div>
               </div>
             </GlassCard>

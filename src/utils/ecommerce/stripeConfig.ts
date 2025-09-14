@@ -44,7 +44,7 @@ export interface GMaxingProduct {
   price: number;
   currency: string;
   type: 'one-time' | 'subscription';
-  category: 'coaching' | 'protocol' | 'consultation' | 'premium';
+  category: 'coaching' | 'protocol' | 'consultation' | 'premium' | 'clothing' | 'manga';
   features: string[];
   stripePriceId: string;
   stripeProductId: string;
@@ -224,6 +224,156 @@ export const GMAX_PRODUCTS: GMaxingProduct[] = [
       'Sessions live mensuelles',
       'Support premium',
       'Outils avancés'
+    ]
+  },
+
+  // Vêtements de Sport G-Maxing
+  {
+    id: 'tshirt-gmax-classic',
+    name: 'T-Shirt G-Maxing Classic',
+    description: 'T-shirt premium en coton bio avec le logo G-Maxing. Parfait pour vos séances d\'entraînement.',
+    price: 29,
+    currency: 'EUR',
+    type: 'one-time',
+    category: 'clothing',
+    stripePriceId: 'price_tshirt_classic',
+    stripeProductId: 'prod_tshirt_classic',
+    features: [
+      '100% coton bio certifié',
+      'Coupe moderne et confortable',
+      'Logo G-Maxing brodé',
+      'Résistant aux lavages',
+      'Disponible en plusieurs tailles'
+    ],
+    includes: [
+      'T-shirt premium qualité',
+      'Emballage écologique',
+      'Guide d\'entretien',
+      'Sticker G-Maxing offert'
+    ]
+  },
+
+  {
+    id: 'debardeur-gmax-performance',
+    name: 'Débardeur G-Maxing Performance',
+    description: 'Débardeur technique respirant pour des entraînements intensifs. Design moderne inspiré du fitness.',
+    price: 25,
+    currency: 'EUR',
+    type: 'one-time',
+    category: 'clothing',
+    stripePriceId: 'price_debardeur_performance',
+    stripeProductId: 'prod_debardeur_performance',
+    popular: true,
+    features: [
+      'Tissu technique respirant',
+      'Séchage rapide',
+      'Coupe athlétique',
+      'Design G-Maxing moderne',
+      'Idéal musculation'
+    ],
+    includes: [
+      'Débardeur technique',
+      'Emballage premium',
+      'Guide d\'entraînement bonus'
+    ]
+  },
+
+  {
+    id: 'short-gmax-training',
+    name: 'Short G-Maxing Training',
+    description: 'Short d\'entraînement avec poches pratiques. Confort optimal pour vos séances G-Maxing.',
+    price: 35,
+    currency: 'EUR',
+    type: 'one-time',
+    category: 'clothing',
+    stripePriceId: 'price_short_training',
+    stripeProductId: 'prod_short_training',
+    features: [
+      'Tissu stretch 4-way',
+      '2 poches latérales',
+      'Poche téléphone sécurisée',
+      'Taille élastique confortable',
+      'Longueur optimale'
+    ],
+    includes: [
+      'Short technique premium',
+      'Cordon de serrage inclus',
+      'Emballage écologique'
+    ]
+  },
+
+  // Collection Manga Style
+  {
+    id: 'tshirt-manga-warrior',
+    name: 'T-Shirt Manga Warrior',
+    description: 'T-shirt style manga avec design guerrier inspiré des animes. Pour les passionnés de culture japonaise.',
+    price: 32,
+    currency: 'EUR',
+    type: 'one-time',
+    category: 'manga',
+    stripePriceId: 'price_tshirt_manga_warrior',
+    stripeProductId: 'prod_tshirt_manga_warrior',
+    features: [
+      'Design manga original',
+      'Impression haute qualité',
+      'Style streetwear japonais',
+      'Coton premium 220g/m²',
+      'Couleurs vives durables'
+    ],
+    includes: [
+      'T-shirt design exclusif',
+      'Carte postale manga offerte',
+      'Emballage collector'
+    ]
+  },
+
+  {
+    id: 'hoodie-anime-champion',
+    name: 'Hoodie Anime Champion',
+    description: 'Sweat à capuche style anime avec motifs inspirés des champions. Confort et style réunis.',
+    price: 55,
+    currency: 'EUR',
+    type: 'one-time',
+    category: 'manga',
+    stripePriceId: 'price_hoodie_anime_champion',
+    stripeProductId: 'prod_hoodie_anime_champion',
+    popular: true,
+    features: [
+      'Capuche doublée',
+      'Poche kangourou',
+      'Design anime exclusif',
+      'Molleton épais 300g/m²',
+      'Finitions japonaises'
+    ],
+    includes: [
+      'Hoodie premium',
+      'Pins collector offerts',
+      'Stickers manga pack',
+      'Emballage cadeau'
+    ]
+  },
+
+  {
+    id: 'casquette-manga-style',
+    name: 'Casquette Manga Style',
+    description: 'Casquette snapback avec broderies manga. Accessoire parfait pour les fans d\'anime.',
+    price: 22,
+    currency: 'EUR',
+    type: 'one-time',
+    category: 'manga',
+    stripePriceId: 'price_casquette_manga',
+    stripeProductId: 'prod_casquette_manga',
+    features: [
+      'Visière plate moderne',
+      'Broderie manga 3D',
+      'Système snapback ajustable',
+      'Matières premium',
+      'Design street japonais'
+    ],
+    includes: [
+      'Casquette ajustable',
+      'Boîte de protection',
+      'Autocollants bonus'
     ]
   }
 ];

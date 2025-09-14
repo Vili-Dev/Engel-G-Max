@@ -43,7 +43,8 @@
     "featured": "Destacado",
     "popular": "Popular",
     "new": "Nuevo",
-    "recommended": "Recomendado"
+    "recommended": "Recomendado",
+    "language": "Idioma"
   },
   "navigation": {
     "home": "Inicio",
@@ -64,7 +65,7 @@
   "hero": {
     "title": "Transforma Tu Rendimiento Atlético",
     "subtitle": "Entrenamiento experto y protocolos personalizados para maximizar tu potencial",
-    "description": "Únete a miles de atletas que han revolucionado su entrenamiento con la metodología G-Maxing probada de Engel Garcia Gomez.",
+    "description": "Descubre un enfoque personalizado para maximizar tu potencial con la metodología G-Maxing de Engel Garcia Gomez.",
     "cta": {
       "primary": "Comienza Tu Transformación",
       "secondary": "Saber Más",
@@ -74,13 +75,17 @@
       "athletes_trained": "Atletas Entrenados",
       "success_rate": "Tasa de Éxito",
       "years_experience": "Años de Experiencia",
-      "protocols_created": "Protocolos Creados"
+      "protocols_created": "Protocolos Creados",
+      "clients_coached": "Clientes Entrenados",
+      "passion": "Pasión & Compromiso",
+      "records": "Récords Rotos",
+      "method": "Método Exclusivo"
     }
   },
   "about": {
     "title": "Conoce a Engel Garcia Gomez",
     "subtitle": "Entrenador de Rendimiento Deportivo de Clase Mundial",
-    "description": "Con más de una década de experiencia en entrenamiento deportivo de élite, Engel Garcia Gomez ha desarrollado la metodología revolucionaria G-Maxing que ha transformado miles de atletas en todo el mundo.",
+    "description": "Entrenador deportivo apasionado que inicia su camino, Engel Garcia Gomez ha creado la metodología G-Maxing para ayudarte a maximizar tu potencial y desarrollar confianza a través del coaching personalizado.",
     "expertise": {
       "title": "Áreas de Especialización",
       "strength": "Fuerza y Acondicionamiento",
@@ -88,14 +93,45 @@
       "recovery": "Recuperación y Rehabilitación",
       "nutrition": "Nutrición Deportiva",
       "psychology": "Psicología Deportiva",
-      "biomechanics": "Análisis Biomecánico"
+      "biomechanics": "Análisis Biomecánico",
+      "descriptions": {
+        "strength": "Optimización de la fuerza máxima y desarrollo de potencia explosiva con protocolos científicos avanzados.",
+        "performance": "Análisis biomecánico completo y optimización del rendimiento atlético para resultados excepcionales.",
+        "recovery": "Técnicas de recuperación avanzadas y prevención de lesiones para una progresión constante y segura.",
+        "nutrition": "Estrategias nutricionales personalizadas que optimizan las adaptaciones fisiológicas y la composición corporal.",
+        "psychology": "Entrenamiento mental y optimización psicológica para una mentalidad de rendimiento óptimo.",
+        "biomechanics": "Análisis biomecánico profundo para optimizar los patrones de movimiento y maximizar la eficiencia.",
+        "psychology": "Coaching mental y optimización de la motivación para superar las barreras psicológicas."
+      }
     },
     "achievements": {
       "title": "Logros",
       "certifications": "Certificaciones Internacionales",
       "publications": "Publicaciones Investigación",
       "athletes": "Atletas Élite Entrenados",
-      "records": "Récords Rotos"
+      "records": "Récords Rotos",
+      "items": {
+        "engagement": {
+          "number": "100%",
+          "label": "Compromiso Personal",
+          "description": "Dedicación total a la mejora continua y el aprendizaje autodidacta"
+        },
+        "method": {
+          "number": "G-Max",
+          "label": "Método Creado",
+          "description": "Método G-Maxing desarrollado para optimizar el potencial de cada uno"
+        },
+        "clients": {
+          "number": "5",
+          "label": "Clientes Entrenados",
+          "description": "Clientes acompañados con pasión hacia sus objetivos personales"
+        },
+        "records": {
+          "number": "3",
+          "label": "Récords Rotos",
+          "description": "Récords personales alcanzados por sus clientes con el método G-Maxing"
+        }
+      }
     }
   },
   "services": {
@@ -144,6 +180,80 @@
         "Prevención de lesiones",
         "Planificación a largo plazo"
       ]
+    },
+    "service_features": {
+      "personal": [
+        "Evaluación biomecánica completa y análisis postural",
+        "Protocolos G-Maxing 100% personalizados según tus objetivos",
+        "Sesiones individuales con Engel Garcia Gomez",
+        "Seguimiento nutricional completo y optimización hormonal",
+        "Análisis sanguíneos y ajustes en tiempo real",
+        "Apoyo mental y coaching psicológico",
+        "Acceso prioritario a nuevos métodos G-Maxing",
+        "Garantía de resultados o reembolso íntegro"
+      ],
+      "group": [
+        "Grupos de máximo 6 personas para seguimiento óptimo",
+        "Protocolos G-Maxing adaptados al nivel del grupo",
+        "Sesiones dinámicas y motivación colectiva",
+        "Coaching directo por Engel Garcia Gomez",
+        "Planes nutricionales personalizados para cada miembro",
+        "Desafíos mensuales y recompensas",
+        "Acceso a la comunidad privada G-Maxing Elite"
+      ],
+      "online": [
+        "Plataforma exclusiva con IA integrada",
+        "Protocolos G-Maxing personalizados en tiempo real",
+        "Videos de ejercicios con correcciones técnicas",
+        "Sesiones de video semanales con Engel",
+        "Aplicación móvil con seguimiento completo",
+        "Comunidad mundial de practicantes G-Maxing",
+        "Biblioteca de +500 protocolos de entrenamiento"
+      ],
+      "protocol": [
+        "Análisis completo de tus necesidades específicas",
+        "Desarrollo a medida por Engel Garcia Gomez",
+        "Metodología G-Maxing adaptada a tu deporte",
+        "Pruebas y validaciones científicas",
+        "Formación completa en el uso del protocolo",
+        "Actualizaciones y evoluciones permanentes",
+        "Certificación oficial G-Maxing"
+      ]
+    },
+    "common_texts": {
+      "popular_badge": "⭐ Más Popular",
+      "see_less": "Ver menos",
+      "more_benefits": "otros beneficios",
+      "choose_service": "Elegir este Servicio",
+      "more_details": "Más Detalles",
+      "on_quote": "Bajo presupuesto",
+      "per_month": "/mes",
+      "from": "Desde ",
+      "free_consultation": "🎯 Consulta Gratuita",
+      "see_method": "Ver el Método G-Maxing",
+      "our_services_title": "🏆 Nuestros Servicios de Coaching G-Maxing",
+      "choose_level": "Elige el nivel de apoyo que coincida con tus objetivos y beneficiate de la experiencia de Engel Garcia Gomez.",
+      "countries_covered": "Países Cubiertos",
+      "coaching_services_title": "🧬 Servicios de Coaching",
+      "g_maxing_subtitle": "G-Maxing de Engel Garcia Gomez"
+    },
+    "process_steps": {
+      "evaluation": {
+        "title": "Evaluación Completa",
+        "description": "Análisis biomecánico, pruebas de rendimiento y evaluación de tu potencial genético único."
+      },
+      "protocol": {
+        "title": "Protocolo Personalizado",
+        "description": "Creación de un protocolo G-Maxing 100% adaptado a tu perfil, objetivos y limitaciones."
+      },
+      "coaching": {
+        "title": "Coaching Directo",
+        "description": "Coaching directo y acompañamiento en la ejecución de tu protocolo optimizado."
+      },
+      "optimization": {
+        "title": "Optimización Continua",
+        "description": "Ajustes permanentes basados en tu progreso y la evolución de tu rendimiento."
+      }
     }
   },
   "protocols": {
@@ -306,6 +416,17 @@
     "view_protocols": "Ver Protocolos",
     "schedule_session": "Programar Sesión",
     "track_progress": "Seguir Progreso"
+  },
+  "stats_labels": {
+    "clients_transformed": "Clientes Transformados",
+    "success_rate": "Tasa de Éxito",
+    "years_experience": "Años de Experiencia",
+    "protocols_created": "Protocolos Creados",
+    "fixed_stats": {
+      "clients": "5",
+      "success_rate": "98%",
+      "countries": "3+"
+    }
   },
   "footer": {
     "company": {

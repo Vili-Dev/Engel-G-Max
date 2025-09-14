@@ -104,9 +104,52 @@ export class BlogEngine {
   private posts: Map<string, BlogPost> = new Map();
   private categories: Map<string, BlogCategory> = new Map();
   private analytics: BlogAnalytics = this.initializeAnalytics();
+  private readonly STORAGE_KEY = 'engelgmax_blogengine_posts';
 
   constructor() {
+    this.loadFromStorage();
     this.initializeDefaultContent();
+  }
+
+  /**
+   * Charger les données depuis localStorage
+   */
+  private loadFromStorage() {
+    try {
+      const stored = localStorage.getItem(this.STORAGE_KEY);
+      if (stored) {
+        const data = JSON.parse(stored);
+        // Restaurer les posts
+        if (data.posts) {
+          Object.entries(data.posts).forEach(([id, postData]: [string, any]) => {
+            // Convertir les dates string en objets Date
+            const post = {
+              ...postData,
+              publishedAt: new Date(postData.publishedAt),
+              updatedAt: new Date(postData.updatedAt)
+            };
+            this.posts.set(id, post);
+          });
+        }
+        console.log(`📚 Chargé ${this.posts.size} articles depuis localStorage`);
+      }
+    } catch (error) {
+      console.error('Erreur lors du chargement depuis localStorage:', error);
+    }
+  }
+
+  /**
+   * Sauvegarder les données dans localStorage
+   */
+  private saveToStorage() {
+    try {
+      const data = {
+        posts: Object.fromEntries(this.posts.entries())
+      };
+      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(data));
+    } catch (error) {
+      console.error('Erreur lors de la sauvegarde dans localStorage:', error);
+    }
   }
 
   /**
@@ -190,6 +233,10 @@ export class BlogEngine {
    * Créer un nouvel article
    */
   public createPost(post: BlogPost): string {
+    // Vérifier si l'article existe déjà
+    const existingPost = this.posts.get(post.id);
+    const isUpdate = !!existingPost;
+
     // Générer un ID si non fourni
     if (!post.id) {
       post.id = `post-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
@@ -205,20 +252,32 @@ export class BlogEngine {
       post.readingTime = Math.ceil(post.content.length / 1000);
     }
 
-    // Initialiser les compteurs
-    post.viewCount = post.viewCount || 0;
-    post.likeCount = post.likeCount || 0;
-    post.shareCount = post.shareCount || 0;
+    // Préserver les compteurs existants si c'est une mise à jour
+    if (isUpdate) {
+      post.viewCount = post.viewCount || existingPost.viewCount || 0;
+      post.likeCount = post.likeCount || existingPost.likeCount || 0;
+      post.shareCount = post.shareCount || existingPost.shareCount || 0;
+    } else {
+      // Initialiser les compteurs pour un nouveau post
+      post.viewCount = post.viewCount || 0;
+      post.likeCount = post.likeCount || 0;
+      post.shareCount = post.shareCount || 0;
+    }
 
     this.posts.set(post.id, post);
 
-    // Mettre à jour le compteur de la catégorie
-    const category = this.categories.get(post.category);
-    if (category) {
-      category.postCount++;
+    // Mettre à jour le compteur de la catégorie seulement pour les nouveaux posts
+    if (!isUpdate) {
+      const category = this.categories.get(post.category);
+      if (category) {
+        category.postCount++;
+      }
     }
 
-    console.log('📄 Article blog créé:', post.title);
+    // Sauvegarder dans localStorage
+    this.saveToStorage();
+
+    console.log(isUpdate ? '📝 Article blog mis à jour:' : '📄 Article blog créé:', post.title);
     return post.id;
   }
 
@@ -369,6 +428,7 @@ export class BlogEngine {
     if (post) {
       post.viewCount++;
       this.analytics.totalViews++;
+      this.saveToStorage(); // Sauvegarder les changements
     }
   }
 
@@ -379,6 +439,7 @@ export class BlogEngine {
     const post = this.posts.get(postId);
     if (post) {
       post.likeCount++;
+      this.saveToStorage(); // Sauvegarder les changements
     }
   }
 
@@ -389,6 +450,7 @@ export class BlogEngine {
     const post = this.posts.get(postId);
     if (post) {
       post.shareCount++;
+      this.saveToStorage(); // Sauvegarder les changements
     }
   }
 

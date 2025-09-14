@@ -26,6 +26,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { BlogPost, BlogCategory, PostStatus } from '../../types/blog';
 import BlogEditor from './BlogEditor';
+import { blogEngine } from '../../utils/blog/blogEngine';
 
 interface BlogManagerProps {
   onPostCreate?: (post: BlogPost) => void;
@@ -48,11 +49,113 @@ const BlogManager: React.FC<BlogManagerProps> = ({
     search: ''
   });
 
-  // Initialisation avec des données vides (plus d'exemples mockés)
+  // Clé pour localStorage
+  const BLOG_STORAGE_KEY = 'engelgmax_blog_posts';
+
+  // Fonction pour convertir vers le format blogEngine
+  const convertToBlogEngineFormat = (post: BlogPost): any => {
+    return {
+      id: post.id,
+      slug: post.slug,
+      title: post.title,
+      excerpt: post.excerpt || '',
+      content: post.content || '',
+      author: {
+        name: post.authorName || 'Engel Garcia Gomez',
+        avatar: '/images/engel-avatar.jpg',
+        bio: 'Expert en G-Maxing et transformation physique',
+        socialLinks: {
+          instagram: 'https://instagram.com/engelgarciagomez',
+          youtube: 'https://youtube.com/engelgarciagomez'
+        }
+      },
+      category: post.category || 'g_maxing_guide',
+      tags: post.tags || [],
+      publishedAt: post.publishedAt || new Date(),
+      updatedAt: post.updatedAt || new Date(),
+      featured: post.featured || false,
+      readingTime: post.readingTime || Math.ceil((post.content?.length || 0) / 200),
+      viewCount: post.viewCount || 0,
+      likeCount: post.likeCount || 0,
+      shareCount: post.shareCount || 0,
+      seoData: {
+        metaTitle: post.seoTitle || post.title,
+        metaDescription: post.seoDescription || post.excerpt || '',
+        keywords: post.seoKeywords || post.tags || [],
+        canonicalUrl: `https://engelgmax.com/blog/${post.slug}`,
+        ogImage: post.featuredImage || '/images/og-default.jpg',
+        structuredData: {
+          '@context': 'https://schema.org',
+          '@type': 'BlogPosting',
+          'headline': post.title,
+          'author': {
+            '@type': 'Person',
+            'name': 'Engel Garcia Gomez'
+          },
+          'datePublished': post.publishedAt?.toISOString(),
+          'dateModified': post.updatedAt?.toISOString()
+        }
+      },
+      status: post.status || 'draft',
+      scheduledFor: undefined,
+      relatedPosts: post.relatedPosts || [],
+      comments: [],
+      mediaGallery: post.gallery?.map(img => img.url) || [],
+      difficulty: 'intermédiaire' as const,
+      estimatedResults: undefined,
+      equipment: [],
+      nutrition: false
+    };
+  };
+
+  // Sauvegarder dans localStorage
+  const savePosts = (newPosts: BlogPost[]) => {
+    try {
+      localStorage.setItem(BLOG_STORAGE_KEY, JSON.stringify(newPosts));
+    } catch (error) {
+      console.error('Erreur lors de la sauvegarde des articles:', error);
+    }
+  };
+
+  // Charger depuis localStorage
+  const loadPosts = (): BlogPost[] => {
+    try {
+      const stored = localStorage.getItem(BLOG_STORAGE_KEY);
+      if (stored) {
+        const parsedPosts = JSON.parse(stored);
+        // Convertir les dates string en objets Date
+        return parsedPosts.map((post: any) => ({
+          ...post,
+          createdAt: new Date(post.createdAt),
+          updatedAt: new Date(post.updatedAt),
+          publishedAt: post.publishedAt ? new Date(post.publishedAt) : undefined
+        }));
+      }
+    } catch (error) {
+      console.error('Erreur lors du chargement des articles:', error);
+    }
+    return [];
+  };
+
+  // Initialisation avec des données depuis localStorage
   useEffect(() => {
     // Simuler le chargement
     setTimeout(() => {
-      setPosts([]); // Commencer avec une liste vide
+      const savedPosts = loadPosts();
+      setPosts(savedPosts);
+
+      // Synchroniser les articles publiés avec blogEngine
+      const publishedPosts = savedPosts.filter(post => post.status === 'published');
+      publishedPosts.forEach(post => {
+        try {
+          const blogEnginePost = convertToBlogEngineFormat(post);
+          blogEngine.createPost(blogEnginePost);
+        } catch (error) {
+          console.error('Erreur lors de la synchronisation de l\'article:', post.title, error);
+        }
+      });
+
+      console.log(`✅ ${publishedPosts.length} articles publiés synchronisés avec blogEngine`);
       setLoading(false);
     }, 500);
   }, []);
@@ -79,20 +182,30 @@ const BlogManager: React.FC<BlogManagerProps> = ({
 
   const handleDeletePost = async (postId: string) => {
     if (window.confirm('Êtes-vous sûr de vouloir supprimer cet article ?')) {
-      setPosts(prev => prev.filter(p => p.id !== postId));
+      const updatedPosts = posts.filter(p => p.id !== postId);
+      setPosts(updatedPosts);
+      savePosts(updatedPosts); // Sauvegarder dans localStorage
       onPostDelete?.(postId);
     }
   };
 
   const handleSavePost = (postData: Partial<BlogPost>) => {
+    let updatedPosts: BlogPost[];
+
     if (editingPost) {
       // Modification
       const updatedPost: BlogPost = {
         ...editingPost,
         ...postData,
-        updatedAt: new Date()
+        updatedAt: new Date(),
+        // Si on publie, ajouter la date de publication
+        publishedAt: postData.status === 'published' && !editingPost.publishedAt
+          ? new Date()
+          : editingPost.publishedAt,
+        published: postData.status === 'published'
       };
-      setPosts(prev => prev.map(p => p.id === editingPost.id ? updatedPost : p));
+      updatedPosts = posts.map(p => p.id === editingPost.id ? updatedPost : p);
+      setPosts(updatedPosts);
       onPostUpdate?.(updatedPost);
     } else {
       // Création
@@ -123,11 +236,30 @@ const BlogManager: React.FC<BlogManagerProps> = ({
         relatedPosts: [],
         ...postData
       } as BlogPost;
-      
-      setPosts(prev => [newPost, ...prev]);
+
+      updatedPosts = [newPost, ...posts];
+      setPosts(updatedPosts);
       onPostCreate?.(newPost);
     }
-    
+
+    // Sauvegarder dans localStorage
+    savePosts(updatedPosts);
+
+    // Synchroniser avec blogEngine pour les articles publiés
+    if (postData.status === 'published') {
+      try {
+        // Convertir vers le format blogEngine
+        const blogEnginePost = convertToBlogEngineFormat(
+          editingPost ?
+            updatedPosts.find(p => p.id === editingPost.id)! :
+            updatedPosts[0]
+        );
+        blogEngine.createPost(blogEnginePost);
+      } catch (error) {
+        console.error('Erreur lors de la synchronisation avec blogEngine:', error);
+      }
+    }
+
     setShowEditor(false);
     setEditingPost(null);
   };

@@ -1,26 +1,22 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import Backend from 'i18next-http-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
-import enTranslations from './locales/en.json';
-import frTranslations from './locales/fr.json';
-import esTranslations from './locales/es.json';
+import { translations } from './translations';
 
 const resources = {
   en: {
-    translation: enTranslations,
+    translation: translations.en,
   },
   fr: {
-    translation: frTranslations,
+    translation: translations.fr,
   },
   es: {
-    translation: esTranslations,
+    translation: translations.es,
   },
 };
 
 i18n
-  .use(Backend)
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
@@ -33,13 +29,11 @@ i18n
       escapeValue: false, // React already does escaping
     },
 
+    returnObjects: true, // Allow returning arrays and objects
+
     detection: {
       order: ['localStorage', 'navigator', 'htmlTag'],
       caches: ['localStorage'],
-    },
-
-    backend: {
-      loadPath: '/locales/{{lng}}.json',
     },
 
     react: {

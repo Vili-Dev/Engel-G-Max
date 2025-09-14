@@ -21,7 +21,8 @@ import {
   ClockIcon,
   ArrowTopRightOnSquareIcon,
   PlayIcon,
-  PencilIcon
+  PencilIcon,
+  PaperAirplaneIcon
 } from '@heroicons/react/24/outline';
 import { BlogPost, BlogCategory, BlogVideo, BlogImage, TargetAudience, PostStatus } from '../../types/blog';
 import VideoUtils from '../../utils/videoUtils';
@@ -183,7 +184,7 @@ const BlogEditor: React.FC<BlogEditorProps> = ({ post, onSave, onCancel }) => {
     }));
   };
 
-  // Sauvegarde
+  // Sauvegarde en brouillon
   const handleSave = () => {
     if (!validateForm()) return;
 
@@ -194,7 +195,7 @@ const BlogEditor: React.FC<BlogEditorProps> = ({ post, onSave, onCancel }) => {
         .replace(/\s+/g, '-')
         .replace(/-+/g, '-')
         .trim();
-      
+
       setFormData(prev => ({ ...prev, slug }));
     }
 
@@ -204,6 +205,42 @@ const BlogEditor: React.FC<BlogEditorProps> = ({ post, onSave, onCancel }) => {
 
     const postData: Partial<BlogPost> = {
       ...formData,
+      status: 'draft',
+      published: false,
+      wordCount,
+      readingTime,
+      updatedAt: new Date(),
+      // Générer l'extrait automatiquement si vide
+      excerpt: formData.excerpt || formData.content?.substring(0, 160) + '...'
+    };
+
+    onSave(postData);
+  };
+
+  // Publication de l'article
+  const handlePublish = () => {
+    if (!validateForm()) return;
+
+    // Générer le slug si nouveau post
+    if (!formData.slug) {
+      const slug = formData.title?.toLowerCase()
+        .replace(/[^a-z0-9\s-]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-')
+        .trim();
+
+      setFormData(prev => ({ ...prev, slug }));
+    }
+
+    // Calculer le temps de lecture estimé
+    const wordCount = formData.content?.split(/\s+/).length || 0;
+    const readingTime = Math.ceil(wordCount / 200); // 200 mots par minute
+
+    const postData: Partial<BlogPost> = {
+      ...formData,
+      status: 'published',
+      published: true,
+      publishedAt: new Date(),
       wordCount,
       readingTime,
       updatedAt: new Date(),
@@ -726,10 +763,17 @@ const BlogEditor: React.FC<BlogEditorProps> = ({ post, onSave, onCancel }) => {
           </button>
           <button
             onClick={handleSave}
-            className="glass-btn-primary px-4 py-2 flex items-center space-x-2"
+            className="glass-btn-secondary px-4 py-2 flex items-center space-x-2"
           >
             <BookmarkIcon className="h-4 w-4" />
-            <span>Sauvegarder</span>
+            <span>Sauvegarder en brouillon</span>
+          </button>
+          <button
+            onClick={handlePublish}
+            className="glass-btn-primary px-4 py-2 flex items-center space-x-2"
+          >
+            <PaperAirplaneIcon className="h-4 w-4" />
+            <span>Publier</span>
           </button>
         </div>
       </div>

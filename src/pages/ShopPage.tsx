@@ -1,6 +1,6 @@
 /**
  * Page Boutique G-Maxing
- * Vitrine complète des services et produits d'Engel Garcia Gomez
+ * Services de coaching, protocoles et vêtements de sport/manga d'Engel Garcia Gomez
  */
 
 import React, { useState, useEffect, useMemo } from 'react';
@@ -75,6 +75,8 @@ const ShopPage: React.FC = () => {
     { id: 'coaching', name: 'Coaching Personnel', icon: UserGroupIcon, count: getProductsByCategory('coaching').length },
     { id: 'consultation', name: 'Consultations', icon: AcademicCapIcon, count: getProductsByCategory('consultation').length },
     { id: 'protocol', name: 'Protocoles', icon: SparklesIcon, count: getProductsByCategory('protocol').length },
+    { id: 'clothing', name: 'Vêtements Sport', icon: FireIcon, count: getProductsByCategory('clothing').length },
+    { id: 'manga', name: 'Style Manga', icon: GlobeAltIcon, count: getProductsByCategory('manga').length },
     { id: 'premium', name: 'Premium', icon: StarIcon, count: getProductsByCategory('premium').length }
   ];
 
