@@ -258,7 +258,7 @@ const AboutPage: React.FC = () => {
                   animate={{ y: [0, -10, 0] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 >
-                  🏆 Expert G-Maxing
+                  🏆 {t('about.badges.expert')}
                 </motion.div>
                 
                 <motion.div
@@ -266,7 +266,7 @@ const AboutPage: React.FC = () => {
                   animate={{ y: [0, 10, 0] }}
                   transition={{ duration: 2, repeat: Infinity, delay: 1 }}
                 >
-                  ⚡ 5+ Ans d'Expérience
+                  ⚡ {t('about.badges.experience')}
                 </motion.div>
               </div>
             </motion.div>
@@ -313,21 +313,24 @@ const AboutPage: React.FC = () => {
                 animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                 transition={{ duration: 0.8, delay: 1 }}
               >
-                {[
-                  '🧬 Créateur de la Méthode G-Maxing révolutionnaire',
-                  '🏆 Coach de +10 athlètes',
-                ].map((highlight, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={heroInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                    transition={{ duration: 0.5, delay: 1 + (index * 0.1) }}
-                    className="flex items-center text-white"
-                  >
-                    <span className="mr-3">{highlight.split(' ')[0]}</span>
-                    <span>{highlight.substring(highlight.indexOf(' ') + 1)}</span>
-                  </motion.div>
-                ))}
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={heroInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                  transition={{ duration: 0.5, delay: 1 }}
+                  className="flex items-center text-white"
+                >
+                  <span className="mr-3">🧬</span>
+                  <span>{t('about.highlights.creator')}</span>
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={heroInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                  transition={{ duration: 0.5, delay: 1.1 }}
+                  className="flex items-center text-white"
+                >
+                  <span className="mr-3">🏆</span>
+                  <span>{t('about.highlights.clients')}</span>
+                </motion.div>
               </motion.div>
 
               {/* CTA Buttons */}
@@ -342,7 +345,7 @@ const AboutPage: React.FC = () => {
                   variant="primary"
                   className="glass-btn-primary"
                 >
-                  🎯 Consultation avec Engel
+                  🎯 {t('about.buttons.consultation')}
                   <ArrowRightIcon className="ml-2 h-5 w-5" />
                 </Button>
                 
@@ -352,7 +355,7 @@ const AboutPage: React.FC = () => {
                   className="glass-btn-secondary group"
                 >
                   <PlayIcon className="mr-2 h-5 w-5 group-hover:animate-pulse" />
-                  Voir la Méthode G-Maxing
+                  {t('about.buttons.method')}
                 </Button>
               </motion.div>
             </motion.div>
@@ -373,8 +376,7 @@ const AboutPage: React.FC = () => {
               🎯 {t('about.expertise.title')}
             </h2>
             <p className="text-gray-300 text-lg max-w-3xl mx-auto">
-              Engel Garcia Gomez maîtrise tous les aspects de la performance humaine, 
-              de la biomécanique à la psychologie, pour des transformations exceptionnelles.
+              {t('about.expertise.description')}
             </p>
           </motion.div>
 
@@ -403,8 +405,7 @@ const AboutPage: React.FC = () => {
               🏆 {t('about.achievements.title')}
             </h2>
             <p className="text-gray-300 text-lg max-w-3xl mx-auto">
-              Une carrière exceptionnelle marquée par l'innovation, l'excellence et 
-              des résultats qui parlent d'eux-mêmes.
+              {t('about.achievements.description')}
             </p>
           </motion.div>
 
@@ -433,11 +434,10 @@ const AboutPage: React.FC = () => {
           >
             <GlassCard className="max-w-4xl mx-auto p-12">
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-                🚀 Prêt à Travailler avec Engel Garcia Gomez ?
+                🚀 {t('about.cta.title')}
               </h2>
               <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
-                Bénéficiez de l'expertise d'Engel Garcia Gomez et de sa méthode G-Maxing 
-                révolutionnaire pour transformer radicalement votre physique et vos performances.
+                {t('about.cta.description')}
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
@@ -446,7 +446,7 @@ const AboutPage: React.FC = () => {
                   size="lg" 
                   className="glass-btn-primary text-lg px-8 py-4"
                 >
-                  🎯 Consultation Personnalisée
+                  🎯 {t('about.cta.buttons.consultation')}
                   <ArrowRightIcon className="ml-2 h-5 w-5" />
                 </Button>
                 
@@ -455,27 +455,23 @@ const AboutPage: React.FC = () => {
                   size="lg" 
                   className="glass-btn-secondary text-lg px-8 py-4"
                 >
-                  📖 Découvrir la Méthode G-Maxing
+                  📖 {t('about.cta.buttons.programs')}
                 </Button>
               </div>
 
               {/* Trust indicators */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center text-sm text-gray-400">
-                <div>
-                  <div className="text-primary-400 font-bold text-lg">100%</div>
-                  <div>{t('stats_labels.passion_devotion')}</div>
-                </div>
-                <div>
-                  <div className="text-primary-400 font-bold text-lg">5</div>
-                  <div>{t('stats_labels.clients_coached')}</div>
-                </div>
-                <div>
-                  <div className="text-primary-400 font-bold text-lg">3</div>
-                  <div>{t('stats_labels.records_broken')}</div>
-                </div>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-center text-sm text-gray-400">
                 <div>
                   <div className="text-primary-400 font-bold text-lg">24/7</div>
-                  <div>Support Disponible</div>
+                  <div>{t('about.cta.features.support')}</div>
+                </div>
+                <div>
+                  <div className="text-primary-400 font-bold text-lg">1</div>
+                  <div>{t('about.cta.features.method')}</div>
+                </div>
+                <div>
+                  <div className="text-primary-400 font-bold text-lg">100%</div>
+                  <div>{t('about.cta.features.results')}</div>
                 </div>
               </div>
             </GlassCard>

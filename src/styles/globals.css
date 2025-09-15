@@ -48,6 +48,14 @@
 * {
   border-color: theme('colors.slate.200');
   scroll-behavior: smooth;
+  /* Prevent any element from causing horizontal overflow */
+  box-sizing: border-box;
+}
+
+/* Ensure all elements respect viewport width */
+*, *::before, *::after {
+  box-sizing: border-box;
+  max-width: 100%;
 }
 
 *::selection {
@@ -58,6 +66,8 @@
 html {
   font-feature-settings: 'cv11', 'ss01';
   font-variation-settings: 'opsz' 32;
+  /* Prevent horizontal scroll */
+  overflow-x: hidden;
 }
 
 body {
@@ -66,6 +76,43 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  /* Prevent horizontal scroll and ensure full width containment */
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* Prevent horizontal overflow on all devices */
+.container, .max-w-7xl, .max-w-4xl, .max-w-3xl {
+  max-width: calc(100vw - 2rem);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Ensure grids don't overflow */
+.grid {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Modal and overlay protection */
+.fixed.inset-0 {
+  max-width: 100vw !important;
+  overflow-x: hidden !important;
+}
+
+/* Protect all containers from overflow */
+.prose, .prose-invert {
+  max-width: 100% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+/* Text content protection */
+h1, h2, h3, h4, h5, h6, p, div {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 /* Disable zoom on mobile inputs */
@@ -77,6 +124,13 @@ body {
   select,
   textarea {
     font-size: 16px !important;
+  }
+
+  /* Extra protection for mobile */
+  .container, .max-w-7xl, .max-w-4xl, .max-w-3xl {
+    max-width: calc(100vw - 1rem);
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
   }
 }
 

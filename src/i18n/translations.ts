@@ -14,6 +14,81 @@ export const translations = {
       admin: "Admin"
     },
 
+    // About Page
+    about: {
+      subtitle: "Creator of the G-Maxing Method & Elite Sports Coach",
+      description: "Passionate sports coach dedicated to maximizing your potential through personalized training programs and cutting-edge transformation methods.",
+      badges: {
+        expert: "G-Maxing Expert",
+        experience: "5+ Years Experience"
+      },
+      highlights: {
+        creator: "Creator of the revolutionary G-Maxing Method",
+        clients: "Coach of +10 athletes"
+      },
+      buttons: {
+        consultation: "Consultation with Engel",
+        method: "View G-Maxing Method"
+      },
+      expertise: {
+        title: "Expertise Areas",
+        description: "Engel Garcia Gomez masters all aspects of human performance, from biomechanics to psychology, for exceptional transformations.",
+        strength: "Strength & Power",
+        performance: "Performance Analysis",
+        recovery: "Recovery & Regeneration",
+        nutrition: "Sports Nutrition",
+        psychology: "Sports Psychology",
+        biomechanics: "Biomechanics",
+        descriptions: {
+          strength: "Advanced strength training protocols and power development for maximum muscle growth and athletic performance.",
+          performance: "Comprehensive analysis and optimization of athletic performance using scientific methods and cutting-edge technology.",
+          recovery: "Strategic recovery programs and regeneration techniques to maximize training adaptations and prevent injuries.",
+          nutrition: "Personalized nutrition strategies tailored to training goals and body composition objectives.",
+          psychology: "Mental training and psychological preparation for peak performance and confidence building.",
+          biomechanics: "Movement analysis and technique optimization to improve efficiency and reduce injury risk."
+        }
+      },
+      achievements: {
+        title: "Professional Achievements",
+        description: "An exceptional career marked by innovation, excellence and results that speak for themselves.",
+        items: {
+          engagement: {
+            number: "100%",
+            label: "Client Commitment",
+            description: "Total dedication to your success"
+          },
+          method: {
+            number: "1",
+            label: "Unique Method",
+            description: "Revolutionary G-Maxing approach"
+          },
+          clients: {
+            number: "+50",
+            label: "Transformations",
+            description: "Successful client transformations"
+          },
+          records: {
+            number: "15+",
+            label: "Records Broken",
+            description: "Personal and performance records"
+          }
+        }
+      },
+      cta: {
+        title: "Ready to Work with Engel Garcia Gomez?",
+        description: "Benefit from Engel Garcia Gomez's expertise and his revolutionary G-Maxing method to radically transform your physique and performance.",
+        buttons: {
+          consultation: "Personal Consultation",
+          programs: "View Programs"
+        },
+        features: {
+          support: "24/7 Personalized Support",
+          method: "Exclusive G-Maxing Method",
+          results: "Guaranteed Results"
+        }
+      }
+    },
+
     // Common
     common: {
       loading: "Loading...",
@@ -210,6 +285,81 @@ export const translations = {
       admin: "Admin"
     },
 
+    // About Page
+    about: {
+      subtitle: "Créateur de la Méthode G-Maxing & Coach Sportif d'Élite",
+      description: "Coach sportif passionné dédié à maximiser votre potentiel grâce à des programmes d'entraînement personnalisés et des méthodes de transformation révolutionnaires.",
+      badges: {
+        expert: "Expert G-Maxing",
+        experience: "5+ Ans d'Expérience"
+      },
+      highlights: {
+        creator: "Créateur de la Méthode G-Maxing révolutionnaire",
+        clients: "Coach de +10 athlètes"
+      },
+      buttons: {
+        consultation: "Consultation avec Engel",
+        method: "Voir la Méthode G-Maxing"
+      },
+      expertise: {
+        title: "Domaines d'Expertise",
+        description: "Engel Garcia Gomez maîtrise tous les aspects de la performance humaine, de la biomécanique à la psychologie, pour des transformations exceptionnelles.",
+        strength: "Force & Puissance",
+        performance: "Analyse Performance",
+        recovery: "Récupération & Régénération",
+        nutrition: "Nutrition Sportive",
+        psychology: "Psychologie du Sport",
+        biomechanics: "Biomécanique",
+        descriptions: {
+          strength: "Protocoles d'entraînement avancés en force et développement de la puissance pour une croissance musculaire et des performances athlétiques maximales.",
+          performance: "Analyse et optimisation complètes des performances athlétiques utilisant des méthodes scientifiques et des technologies de pointe.",
+          recovery: "Programmes de récupération stratégiques et techniques de régénération pour maximiser les adaptations d'entraînement et prévenir les blessures.",
+          nutrition: "Stratégies nutritionnelles personnalisées adaptées aux objectifs d'entraînement et de composition corporelle.",
+          psychology: "Entraînement mental et préparation psychologique pour des performances optimales et le renforcement de la confiance.",
+          biomechanics: "Analyse du mouvement et optimisation de la technique pour améliorer l'efficacité et réduire le risque de blessures."
+        }
+      },
+      achievements: {
+        title: "Réalisations Professionnelles",
+        description: "Une carrière exceptionnelle marquée par l'innovation, l'excellence et des résultats qui parlent d'eux-mêmes.",
+        items: {
+          engagement: {
+            number: "100%",
+            label: "Engagement Client",
+            description: "Dévouement total à votre succès"
+          },
+          method: {
+            number: "1",
+            label: "Méthode Unique",
+            description: "Approche G-Maxing révolutionnaire"
+          },
+          clients: {
+            number: "+50",
+            label: "Transformations",
+            description: "Transformations clients réussies"
+          },
+          records: {
+            number: "15+",
+            label: "Records Battus",
+            description: "Records personnels et de performance"
+          }
+        }
+      },
+      cta: {
+        title: "Prêt à Travailler avec Engel Garcia Gomez ?",
+        description: "Bénéficiez de l'expertise d'Engel Garcia Gomez et de sa méthode G-Maxing révolutionnaire pour transformer radicalement votre physique et vos performances.",
+        buttons: {
+          consultation: "Consultation Personnalisée",
+          programs: "Voir les Programmes"
+        },
+        features: {
+          support: "Support Personnalisé 24/7",
+          method: "Méthode G-Maxing Exclusive",
+          results: "Résultats Garantis"
+        }
+      }
+    },
+
     // Common
     common: {
       loading: "Chargement...",
@@ -404,6 +554,81 @@ export const translations = {
       shop: "Tienda",
       contact: "Contacto",
       admin: "Admin"
+    },
+
+    // About Page
+    about: {
+      subtitle: "Creador del Método G-Maxing y Entrenador Deportivo de Élite",
+      description: "Entrenador deportivo apasionado dedicado a maximizar tu potencial a través de programas de entrenamiento personalizados y métodos de transformación revolucionarios.",
+      badges: {
+        expert: "Experto G-Maxing",
+        experience: "5+ Años de Experiencia"
+      },
+      highlights: {
+        creator: "Creador del revolucionario Método G-Maxing",
+        clients: "Entrenador de +10 atletas"
+      },
+      buttons: {
+        consultation: "Consulta con Engel",
+        method: "Ver Método G-Maxing"
+      },
+      expertise: {
+        title: "Áreas de Expertise",
+        description: "Engel Garcia Gomez domina todos los aspectos del rendimiento humano, desde la biomecánica hasta la psicología, para transformaciones excepcionales.",
+        strength: "Fuerza y Potencia",
+        performance: "Análisis de Rendimiento",
+        recovery: "Recuperación y Regeneración",
+        nutrition: "Nutrición Deportiva",
+        psychology: "Psicología Deportiva",
+        biomechanics: "Biomecánica",
+        descriptions: {
+          strength: "Protocolos avanzados de entrenamiento de fuerza y desarrollo de potencia para máximo crecimiento muscular y rendimiento atlético.",
+          performance: "Análisis integral y optimización del rendimiento atlético utilizando métodos científicos y tecnología de vanguardia.",
+          recovery: "Programas estratégicos de recuperación y técnicas de regeneración para maximizar las adaptaciones del entrenamiento y prevenir lesiones.",
+          nutrition: "Estrategias nutricionales personalizadas adaptadas a los objetivos de entrenamiento y composición corporal.",
+          psychology: "Entrenamiento mental y preparación psicológica para rendimiento óptimo y construcción de confianza.",
+          biomechanics: "Análisis de movimiento y optimización de técnica para mejorar la eficiencia y reducir el riesgo de lesiones."
+        }
+      },
+      achievements: {
+        title: "Logros Profesionales",
+        description: "Una carrera excepcional marcada por la innovación, la excelencia y resultados que hablan por sí mismos.",
+        items: {
+          engagement: {
+            number: "100%",
+            label: "Compromiso Cliente",
+            description: "Dedicación total a tu éxito"
+          },
+          method: {
+            number: "1",
+            label: "Método Único",
+            description: "Enfoque G-Maxing revolucionario"
+          },
+          clients: {
+            number: "+50",
+            label: "Transformaciones",
+            description: "Transformaciones de clientes exitosas"
+          },
+          records: {
+            number: "15+",
+            label: "Récords Rotos",
+            description: "Récords personales y de rendimiento"
+          }
+        }
+      },
+      cta: {
+        title: "¿Listo para Trabajar con Engel Garcia Gomez?",
+        description: "Benefíciate de la experiencia de Engel Garcia Gomez y su revolucionario método G-Maxing para transformar radicalmente tu físico y rendimiento.",
+        buttons: {
+          consultation: "Consulta Personalizada",
+          programs: "Ver Programas"
+        },
+        features: {
+          support: "Soporte Personalizado 24/7",
+          method: "Método G-Maxing Exclusivo",
+          results: "Resultados Garantizados"
+        }
+      }
     },
 
     // Common
