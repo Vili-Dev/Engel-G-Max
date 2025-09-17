@@ -96,9 +96,9 @@ export const BlogCard: React.FC<BlogCardProps> = ({
   };
 
   const cardVariants = {
-    default: 'glass-card p-6',
-    featured: 'glass-card p-8 border-2 border-yellow-500/30 shadow-2xl',
-    compact: 'glass-card p-4'
+    default: 'glass-card p-6 h-full flex flex-col',
+    featured: 'glass-card p-8 border-2 border-yellow-500/30 shadow-2xl h-full flex flex-col',
+    compact: 'glass-card p-4 h-full flex flex-col'
   };
 
   return (
@@ -153,8 +153,8 @@ export const BlogCard: React.FC<BlogCardProps> = ({
         </div>
       </div>
 
-      {/* Contenu principal */}
-      <div className="space-y-4">
+      {/* Contenu principal - flex-grow pour uniformiser les hauteurs */}
+      <div className="space-y-4 flex-grow flex flex-col">
         {/* Catégorie et date */}
         <div className="flex items-center justify-between text-sm">
           <div className={`inline-flex items-center px-3 py-1 rounded-full text-white font-medium bg-gradient-to-r ${getCategoryColor(post.category)}`}>
@@ -212,8 +212,8 @@ export const BlogCard: React.FC<BlogCardProps> = ({
           </div>
         )}
 
-        {/* Stats et actions */}
-        <div className="flex items-center justify-between pt-4 border-t border-white/10">
+        {/* Stats et actions - toujours au bas */}
+        <div className="flex items-center justify-between pt-4 border-t border-white/10 mt-auto">
           {/* Stats */}
           {showStats && (
             <div className="flex items-center space-x-4 text-gray-400 text-sm">

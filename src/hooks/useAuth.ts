@@ -16,7 +16,7 @@ import toast from 'react-hot-toast';
 // Auth Context
 const AuthContext = createContext<AuthState & {
   signIn: (email: string, password: string) => Promise<void>;
-  signUp: (email: string, password: string, displayName: string) => Promise<void>;
+  signUp: (email: string, password: string, displayName: string, username?: string) => Promise<void>;
   signOut: () => Promise<void>;
   resetPassword: (email: string) => Promise<void>;
   updateUserProfile: (updates: Partial<UserProfile>) => Promise<void>;
@@ -98,7 +98,8 @@ export const useAuth = () => {
       
       const result = await AuthService.signIn(email, password);
       
-      toast.success(`Bienvenue ${result.profile.displayName} !`, {
+      const welcomeName = result.profile.username || result.profile.displayName || result.profile.email?.split('@')[0] || 'Utilisateur';
+      toast.success(`Bienvenue ${welcomeName} !`, {
         duration: 4000,
         icon: '👋',
       });
@@ -119,11 +120,11 @@ export const useAuth = () => {
     }
   };
 
-  const signUp = async (email: string, password: string, displayName: string) => {
+  const signUp = async (email: string, password: string, displayName: string, username?: string) => {
     try {
       setAuthState(prev => ({ ...prev, isLoading: true, error: null }));
-      
-      const result = await AuthService.signUp(email, password, displayName);
+
+      const result = await AuthService.signUp(email, password, displayName, username);
       
       toast.success(
         `Compte créé avec succès ! Vérifiez vos emails pour confirmer votre adresse.`,

@@ -20,9 +20,10 @@ export class AuthService {
   
   // Sign up with email and password
   static async signUp(
-    email: string, 
-    password: string, 
+    email: string,
+    password: string,
     displayName: string,
+    username?: string,
     additionalData?: Partial<UserProfile>
   ): Promise<{ user: User; profile: UserProfile }> {
     try {
@@ -37,6 +38,7 @@ export class AuthService {
         uid: user.uid,
         email: user.email!,
         displayName,
+        username: username || undefined,
         role: 'customer',
         isEmailVerified: false,
         createdAt: new Date(),

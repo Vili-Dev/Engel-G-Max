@@ -5,6 +5,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useAuth } from '../../hooks/useAuth';
 import {
   PlusIcon,
   DocumentTextIcon,
@@ -39,6 +40,7 @@ const BlogManager: React.FC<BlogManagerProps> = ({
   onPostUpdate,
   onPostDelete
 }) => {
+  const { user } = useAuth();
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [showEditor, setShowEditor] = useState(false);
@@ -54,6 +56,8 @@ const BlogManager: React.FC<BlogManagerProps> = ({
 
   // Fonction pour convertir vers le format blogEngine
   const convertToBlogEngineFormat = (post: BlogPost): any => {
+    const isEngel = post.authorName === 'Engel Garcia Gomez' || post.authorId === 'engel_garcia_gomez';
+
     return {
       id: post.id,
       slug: post.slug,
@@ -61,13 +65,13 @@ const BlogManager: React.FC<BlogManagerProps> = ({
       excerpt: post.excerpt || '',
       content: post.content || '',
       author: {
-        name: post.authorName || 'Engel Garcia Gomez',
-        avatar: '/images/engel-avatar.jpg',
-        bio: 'Expert en G-Maxing et transformation physique',
-        socialLinks: {
+        name: post.authorName || 'Admin',
+        avatar: isEngel ? '/images/engel-avatar.jpg' : '/images/default-avatar.jpg',
+        bio: isEngel ? 'Expert en G-Maxing et transformation physique' : 'Administrateur du site',
+        socialLinks: isEngel ? {
           instagram: 'https://instagram.com/engelgarciagomez',
           youtube: 'https://youtube.com/engelgarciagomez'
-        }
+        } : {}
       },
       category: post.category || 'g_maxing_guide',
       tags: post.tags || [],
@@ -216,8 +220,8 @@ const BlogManager: React.FC<BlogManagerProps> = ({
           .replace(/\s+/g, '-')
           .replace(/-+/g, '-')
           .trim() || '',
-        authorId: 'admin',
-        authorName: 'Engel Garcia Gomez',
+        authorId: user?.uid || 'admin',
+        authorName: user?.username || user?.displayName || user?.email?.split('@')[0] || 'Admin',
         published: postData.status === 'published',
         publishedAt: postData.status === 'published' ? new Date() : undefined,
         createdAt: new Date(),

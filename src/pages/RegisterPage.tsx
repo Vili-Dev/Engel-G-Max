@@ -14,6 +14,7 @@ const RegisterPage: React.FC = () => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
+    username: '',
     email: '',
     password: '',
     confirmPassword: ''
@@ -49,8 +50,18 @@ const RegisterPage: React.FC = () => {
       return;
     }
 
-    if (!formData.firstName.trim() || !formData.lastName.trim()) {
+    if (!formData.firstName.trim() || !formData.lastName.trim() || !formData.username.trim()) {
       toast.error('Veuillez remplir tous les champs');
+      return;
+    }
+
+    if (formData.username.length < 3) {
+      toast.error('Le pseudo doit contenir au moins 3 caractères');
+      return;
+    }
+
+    if (!/^[a-zA-Z0-9_-]+$/.test(formData.username)) {
+      toast.error('Le pseudo ne peut contenir que des lettres, chiffres, tirets et underscores');
       return;
     }
 
@@ -64,9 +75,10 @@ const RegisterPage: React.FC = () => {
       
       // Créer le compte avec Firebase
       await signUp(
-        formData.email, 
-        formData.password, 
-        `${formData.firstName} ${formData.lastName}`
+        formData.email,
+        formData.password,
+        `${formData.firstName} ${formData.lastName}`,
+        formData.username
       );
       
       // Toast de succès déjà géré dans le hook useAuth
@@ -183,6 +195,27 @@ const RegisterPage: React.FC = () => {
                     required
                   />
                 </div>
+              </div>
+
+              <div>
+                <label htmlFor="username" className="block text-sm font-medium text-gray-300 mb-2">
+                  Pseudo
+                </label>
+                <input
+                  type="text"
+                  id="username"
+                  name="username"
+                  value={formData.username}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent backdrop-blur-sm"
+                  placeholder="john_doe"
+                  required
+                  pattern="^[a-zA-Z0-9_-]+$"
+                  minLength={3}
+                />
+                <p className="text-xs text-gray-400 mt-1">
+                  Minimum 3 caractères, lettres, chiffres, tirets et underscores uniquement
+                </p>
               </div>
 
               <div>
